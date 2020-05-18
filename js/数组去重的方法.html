@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组去重的方法</title>
+</head>
+
+<body>
+    <script>
+        (function () {
+            var arr = [1, 2, 3, 1, 1, 2, 2, 5, 6, 5, 2, 3, 6, 8, 4, 1, 2, 5]
+
+            //1
+            var arr1 = [];
+            for (var i = 0; i < arr.length; i++) {
+                if (arr1.indexOf(arr[i]) == -1) {
+                    arr1.push(arr[i])
+                }
+            }
+            console.log('arr1', arr1)
+            //2
+            const arr2 = arr.filter((item, index) => index === arr.indexOf(item))
+            console.log('arr2', arr2)
+            //利用 ES6的set 方法。
+            const arr3 = Array.from(new Set(arr))
+            console.log('arr3', arr3)
+
+            //数组对象去重
+            var arr4 = [{ name: 'a', id: 1 }, { name: 'a', id: 2 }, { name: 'b', id: 3 }, { name: 'c', id: 4 },
+            { name: 'c', id: 6 }, { name: 'b', id: 6 }, { name: 'd', id: 7 }];
+            //es5冒泡排序法，去重arr
+            // for (var i = 0; i < arr4.length - 1; i++) {
+            //     for (var j = i + 1; j < arr4.length; j++) {
+            //         if (arr4[i].name == arr4[j].name) {
+            //             arr4.splice(j, 1);
+            //             //因为数组长度减小1，所以直接 j++ 会漏掉一个元素，所以要 j--
+            //             j--;
+            //         }
+            //     }
+            // }
+
+            //es5 reduce
+            // var obj = {};
+            // arr4 = arr4.reduce(function (a, b) {
+            //     obj[b.name] ? '' : obj[b.name] = true && a.push(b);
+            //     return a;
+            // }, [])
+
+            // es5双重循环
+            const temp = []
+            arr4.forEach(function (a) {
+                var check = temp.every(function (b) {
+                    return a.name !== b.name;
+                })
+                check ? temp.push(a) : ''
+            })
+            console.log('arr4', temp)
+        })()
+
+    </script>
+</body>
+
+</html>

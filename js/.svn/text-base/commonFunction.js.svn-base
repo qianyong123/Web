@@ -1,0 +1,73 @@
+import store from '../store'
+export default{
+  //操作权限
+    operationLimits(names,names2){    
+        let NavPermissions=store.state.NavPermissions,
+            name=[],
+            name2=[];
+        if(NavPermissions.length>0){
+           name= NavPermissions.filter((data)=>{
+              if(data.name==names){
+                return true
+              }
+          })
+        //    console.log('name',name)
+          if(name.length>0){
+            if(name[0].flag==0){
+              name2=name[0].child.filter((data2)=>{
+                if(data2.name=='操作'){
+                  return true
+                }
+              })
+            }
+            else if(name[0].flag==1){
+             let name3=name[0].child.filter((data2)=>{
+                if(data2.name==names2){
+                  return true
+                }
+              })
+              if(name3.length>0){
+                name2=name3[0].child.filter((data2)=>{
+                  if(data2.name=='操作'){
+                    return true
+                  }
+                })
+              }
+            }
+           
+          }                
+          console.log('name2',name2)
+          return name2.length>0?true:false
+        }
+    }, 
+    //收容所显示/隐藏
+    isshourong(){
+      const id=localStorage.getItem('roleId')
+        if(id==1||id==2){
+          return true
+        }else return false
+    },
+    //只有执法局和执法点才有权限
+    showReplaceStatus2(roleId,status){
+        if(status=='待审批'){
+          if(roleId==1||roleId==2){
+              return true
+          }else return false
+      }
+    },
+    //只有管理员才可以编辑
+    showEdit(){
+      // return true
+      const id=localStorage.getItem('roleId')
+        if(id==1||id==2){
+          return true
+        }else return false
+    },
+      //删除权限
+    showDelete(){
+        const id=localStorage.getItem('roleId')
+        if(id==1){
+          return true
+        }else return false
+    }
+}
