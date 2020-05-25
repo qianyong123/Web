@@ -32,11 +32,6 @@
     "tslint": "npm run tslint:fix",
     "tslint:fix": "tslint --fix 'src/**/*.ts*'"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged"
-    }
-  },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx}": "npm run lint-staged:js",
@@ -52,6 +47,8 @@
   ],
   "dependencies": {
     "@antv/data-set": "^0.10.1",
+    "@antv/l7": "^2.2.8",
+    "@antv/l7-maps": "^2.2.8",
     "@antv/l7-react": "^2.2.3",
     "antd": "^3.16.1",
     "bizcharts": "^3.5.3-beta.0",

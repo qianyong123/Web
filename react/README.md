@@ -1,3 +1,10 @@
+git commit 提交时检测代码是否规范
+ "husky": {
+     "hooks": {
+       "pre-commit": "npm run lint-staged"
+     }
+   },
+
 ### antV  
 AntV 是一个数据可视化项目，也是一个团队，蚂蚁金服数据可视化团队，一群有爱有梦的人，怀揣"让人们在数据世界里获得视觉化思考能力"的梦想前行， 希望成就智能时代全球领先的数据可视化解决方案，满足与日俱增的数据洞察需求。 详见 https://antv.vision/zh
 https://l7.antv.vision/zh/docs/api/react/scene 
