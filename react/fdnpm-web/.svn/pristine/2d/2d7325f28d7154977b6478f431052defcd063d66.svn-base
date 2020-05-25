@@ -1,0 +1,298 @@
+import React, { PureComponent, Fragment } from 'react'
+import { string, object, func, bool } from 'prop-types'
+import {
+  Button,
+  Form,
+  Input,
+  Modal,
+  Select,
+  Radio,
+  Tooltip,
+  Icon,
+  TreeSelect,
+  Row,
+  Col,
+} from 'antd'
+
+import globalStyles from '@/global.less'
+import Styles from './index.less'
+
+const { Option } = Select
+
+const FORM_ITEM_LAYOUT = {
+  labelCol: {
+    span: 7,
+  },
+  wrapperCol: {
+    span: 16,
+  },
+  labelAlign: 'right',
+}
+
+@Form.create({
+  mapPropsToFields({ item: { ...rest } }) {
+    const { createFormField } = Form
+    const files = {}
+    Object.keys(rest).map(key => {
+      files[key] = createFormField({
+        value: rest[key],
+      })
+      return key
+    })
+    return {
+      ...files,
+    }
+  },
+})
+class FormComp extends PureComponent {
+  static propTypes = {
+    item: object,
+    title: string.isRequired,
+    modalVisible: bool.isRequired,
+    form: object.isRequired,
+    submitForm: func.isRequired,
+    onCancelClick: func.isRequired,
+  }
+
+  static defaultProps = {
+    item: {},
+  }
+
+  state = {
+    table: [{ sub: 1 }],
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+
+    const { form, item, submitForm, data } = this.props
+
+    return form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        // item.id ?  : submitForm(item.id, { ...values })
+
+        submitForm(item.id, { ...item, ...values })
+      }
+    })
+  }
+
+  addTable = () => {
+    const { table } = this.state
+    const index = table[table.length - 1].sub
+    table.push({ sub: index + 1 })
+    const newArr = JSON.parse(JSON.stringify(table))
+    this.setState({ table: newArr })
+  }
+
+  delItem = (index) => {
+    const { table } = this.state
+    const newArr = table.filter((item) => item.sub !== index)
+    this.setState({ table: newArr })
+  }
+
+
+  render() {
+    const { form, title, modalVisible, onCancelClick, nameList = [], typeList = [] } = this.props
+    const { getFieldDecorator } = form
+    const { table } = this.state
+    const flag = false
+
+    // console.log(table)
+    return (
+      <Modal
+        destroyOnClose
+        footer={[
+          <Button type="primary" onClick={this.handleSubmit}>
+            提交
+          </Button>,
+          <Button style={{ marginLeft: '16px' }} onClick={onCancelClick}>
+            取消
+          </Button>,
+        ]}
+        title={title}
+        visible={modalVisible}
+        onOk={this.handleOk}
+        onCancel={onCancelClick}
+        width="800px"
+      >
+        <Form {...FORM_ITEM_LAYOUT} className={globalStyles.modalForm}>
+          <Row>
+            <Col span={24} style={{ textAlign: 'center', marginBottom: '20px' }}>
+              监测信息
+            </Col>
+          </Row>
+          <Row>
+            <Col span={12}>
+              <Form.Item label="物种名称">
+                {getFieldDecorator('animalName', {
+                  rules: [
+                    {
+                      required: true,
+                      message: '请输入物种名称',
+                      whitespace: true,
+                    },
+                  ],
+                })(
+                  <Select showSearch placeholder="请选择物种名称">
+                    {nameList && nameList.map(item => (
+                      <Option key={item} value={item}>{item}</Option>
+                    ))}
+                  </Select>,
+                )}
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item label="指标分类">
+                {getFieldDecorator('type', {
+                  rules: [
+                    {
+                      required: true,
+                      message: '请选择指标分类',
+                    },
+                  ],
+                })(
+                  <Select showSearch placeholder="请选择指标分类">
+                    {typeList && typeList.map(item => (
+                      <Option key={item} value={item}>{item}</Option>
+                    ))}
+                  </Select>,
+                )}
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row>
+            <Col span={24} style={{ textAlign: 'center', margin: '20px 0px' }}>
+              阈值设置
+            </Col>
+          </Row>
+          <table className={Styles.table}>
+            <tbody>
+            <tr className={Styles.tableRow}>
+              <td className={Styles.tableCell}>条件1</td>
+              <td className={Styles.tableCell}>数值</td>
+              <td className={Styles.tableCell}>条件2</td>
+              <td className={Styles.tableCell}>数值</td>
+              <td className={Styles.tableCell}>风险等级</td>
+              <td className={Styles.tableCell}>颜色标识</td>
+              <td className={Styles.tableCell}>操作</td>
+            </tr>
+
+            {
+              table.map((i) => (
+                <Fragment key={i.sub}>
+                  <tr className={Styles.tableRow}>
+                    <td className={Styles.tableCell}>
+                      <Form.Item>
+                        {getFieldDecorator(`mdlTargers[${i.sub}].operBegin`, {
+                          validateTrigger: ['onChange', 'onBlur'],
+                          // initialValue: item['operBegin'],
+                          rules: [{ required: flag, message: '请选择条件' }],
+                        })(
+                          <Select style={{ width: 80 }} placeholder='请选择'>
+                            <Option value=">">&gt;</Option>
+                            <Option value=">=">&gt;=</Option>
+                            <Option value="=">=</Option>
+                            <Option value="<>">&lt;&gt;</Option>
+                            <Option value="like">like</Option>
+                            <Option value="not like">not like</Option>
+                          </Select>,
+                        )}
+                      </Form.Item>
+                    </td>
+                    <td className={Styles.tableCell}>
+                      <Form.Item>
+                        {getFieldDecorator(`mdlTargers[${i.sub}].beginValue`, {
+                          validateTrigger: ['onChange', 'onBlur'],
+                          // initialValue: item['beginValue'],
+                          rules: [
+                            {
+                              required: flag,
+                              message: '输入数值',
+                              // whitespace: true,
+                              // pattern: /^[-\+]?\d+(\.\d+)?$/,
+                            },
+                          ],
+                        })(<Input style={{ width: 80 }} placeholder="输入数值"/>)}
+                      </Form.Item>
+                    </td>
+                    <td className={Styles.tableCell}>
+                      <Form.Item>
+                        {getFieldDecorator(`mdlTargers[${i.sub}].operEnd`, {
+                          validateTrigger: ['onChange', 'onBlur'],
+                          // initialValue: item['operEnd'],
+                          rules: [{ required: flag, message: '请选择条件' }],
+                        })(
+                          <Select style={{ width: 80 }} placeholder='请选择'>
+                            <Option value="<">&lt;</Option>
+                            <Option value="<=">&lt;=</Option>
+                            <Option value="<>">&lt;&gt;</Option>
+                          </Select>,
+                        )}
+                      </Form.Item>
+                    </td>
+                    <td className={Styles.tableCell}>
+                      <Form.Item>
+                        {getFieldDecorator(`mdlTargers[${i.sub}].endValue`, {
+                          validateTrigger: ['onChange', 'onBlur'],
+                          // initialValue: item['endValue'],
+                          rules: [
+                            {
+                              required: flag,
+                              message: '请输入值',
+                              whitespace: true,
+                              // pattern: /^[-\+]?\d+(\.\d+)?$/,
+                            },
+                          ],
+                        })(<Input style={{ width: 80 }} placeholder="请输入值"/>)}
+                      </Form.Item>
+                    </td>
+                    <td className={Styles.tableCell}>
+                      <Form.Item>
+                        {getFieldDecorator(`mdlTargers[${i.sub}].dengji`, {
+                          validateTrigger: ['onChange', 'onBlur'],
+                          // initialValue: item['operEnd'],
+                          rules: [{ required: flag, message: '请选择风险等级' }],
+                        })(
+                          <Select style={{ width: 80 }} placeholder='请选择'>
+                            <Option value="无危">无危</Option>
+                            <Option value="近危">近危</Option>
+                          </Select>,
+                        )}
+                      </Form.Item>
+                    </td>
+                    <td className={Styles.tableCell}>
+                      <Form.Item>
+                        {getFieldDecorator(`mdlTargers[${i.sub}].dengji`, {
+                          validateTrigger: ['onChange', 'onBlur'],
+                          // initialValue: item['operEnd'],
+                          rules: [{ required: flag, message: '请选择颜色标识' }],
+                        })(
+                          <Select style={{ width: 80 }} placeholder='请选择'>
+                            <Option value="无危">无危</Option>
+                            <Option value="近危">近危</Option>
+                          </Select>,
+                        )}
+                      </Form.Item>
+                    </td>
+                    <td className={Styles.tableCell}>
+                      {
+                        table.length > 1 ? <a style={{ color: '#30BA51' }} onClick={() => this.delItem(i.sub)}>
+                          删除
+                        </a> : "--"
+                      }
+                    </td>
+                  </tr>
+                </Fragment>
+              ))
+            }
+            </tbody>
+          </table>
+          <Button onClick={this.addTable} type="primary" style={{ margin: '20px 0 0 44%' }}>添加</Button>
+        </Form>
+      </Modal>
+    )
+  }
+}
+
+export default FormComp

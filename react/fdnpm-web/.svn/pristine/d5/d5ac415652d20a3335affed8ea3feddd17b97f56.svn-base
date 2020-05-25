@@ -1,0 +1,214 @@
+import React, { Component } from 'react'
+import { connect } from 'dva'
+import { Layout, Button, Modal, message, Card } from 'antd'
+import { getTableFiltersValue } from '@/utils/utils'
+// import Authorized from '@/utils/Authorized'
+import globalStyles from '@/global.less'
+import Filter from './Filter'
+import TableList from './Table'
+import FormComp from './Form'
+
+
+
+// const { Content } = Layout
+
+@connect(({ loading, BasicScoringView }) => {
+  return {
+    listLoading: loading.effects['BasicScoringView/fetch'],
+    BasicScoringView
+  }
+})
+
+/**
+ *@Date:2020/4/23
+ *@Features: 预警监测页面
+ */
+class IndexClassification extends Component {
+  constructor(props) {
+    super(props)
+    // const { selectedIds } = props
+    this.state = {
+      // selectedRows: selectedIds,
+      modal: {
+        item: {},
+        modalType: 'new',
+        modalVisible: false,
+      },
+      filterFormValues: {},
+      yearList: [
+        '2013', '2014', '2015', '2016', '2017', '2018','2019',
+         '2020',],
+         ReserveLevel:[
+          //  {id:1,value:"全部"},
+           {id:2,value:"国家级"},
+           {id:3,value:"省级"},
+           {id:4,value:"市级"},
+           {id:5,value:"县级"},
+
+         ]
+    }
+  }
+
+  componentDidMount() {
+    const { filterFormValues } = this.state
+    // this.requestList(filterFormValues)
+    // this.requestBuildSort()
+  }
+
+  requestBuildSort = () => { // 获取分类
+    const { dispatch } = this.props
+    dispatch({
+      type: 'BasicScoringView/fetchBuildSort',
+      payload: {},
+    })
+  }
+
+  handleModalVisible = (visible = {}, type, data, target) => {
+    const modalProps =
+      typeof visible === 'boolean'
+        ? {
+          modalVisible: visible,
+          modalType: type,
+          item: data,
+          modalTarget: target,
+        }
+        : { ...visible }
+
+    const { modalVisible, modalType, item, modalTarget = 'modal' } = modalProps
+
+    this.setState(() => ({
+      [`${modalTarget}`]: {
+        modalVisible: modalVisible || false,
+        modalType: modalType || 'new',
+        item: item || {},
+      },
+    }))
+  }
+
+  handleSearch = (values = {}) => {
+    this.setState({
+      filterFormValues: values,
+    })
+
+    this.requestList(values)
+  }
+
+  // 重置
+  handleFormReset = () => {
+    this.setState({
+      filterFormValues: {}
+    })
+    this.requestList({})
+  }
+
+  requestList = (params = {}) => {
+    const { dispatch } = this.props
+    dispatch({
+      type: 'BasicScoringView/fetch',
+      payload: {
+        pageNum: 1,
+        pageSize: 10,
+        ...params,
+      },
+    })
+  }
+
+  // 查看
+  handleView = async id => {
+    // const { dispatch } = this.props
+    // const rowItem = await dispatch({
+    //   type: 'BasicScoringView/fetchDetail',
+    //   payload: { id },
+    // })
+    this.handleModalVisible(true, 'view', {})
+  }
+
+  // 表单提交
+  handleFormSubmit = (type, values) => {
+    console.log(type, values)
+    if (type === 'new') {// 新增
+      this.handleAdd(values)
+    } else if (type === 'edit') { // 编辑
+      this.handleEdit(values)
+    }
+  }
+
+
+  handleStandardTableChange = (pagination, filtersArg, sorter) => {
+    const { filterFormValues } = this.state
+
+    const filters = getTableFiltersValue(filtersArg)
+
+    const params = {
+      // pageNum: (pagination.current - 1) * pagination.pageSize,
+      pageNum: pagination.current,
+      pageSize: pagination.pageSize,
+      ...filterFormValues,
+      ...filters,
+    }
+    if (sorter.field) {
+      params.sorter = `${sorter.field}_${sorter.Refund}`
+    }
+
+    this.requestList(params)
+  }
+
+  render() {
+    const { modal,yearList,ReserveLevel } = this.state
+    const {
+      listLoading,
+      submitLoading,
+      BasicScoringView: { data }
+    } = this.props
+
+    return (
+      <div>
+        <Layout>
+          <Card bordered={false} style={{ marginBottom: 20 }}>
+            <Filter
+              resetForm={this.handleFormReset}
+              onSearch={this.handleSearch}
+              yearList={yearList}
+              ReserveLevel={ReserveLevel}
+            />
+          </Card>
+          <Card bordered={false}>
+            <div style={{ marginBottom: 5 }}>
+              <span>共有<b>{data.pagination.total || 0}</b>条信息，共<b>{Math.ceil(data.pagination.total / data.pagination.pageSize) || 0}</b>页</span>
+              {/* <Button
+                icon="plus"
+                className={globalStyles.button}
+                onClick={() => this.handleModalVisible(true)}
+                style={{ background: '#ee9800', color: '#fff', float: 'right', marginBottom: 20 }}
+              >
+                新增
+              </Button> */}
+            </div>
+            <TableList
+              selectedMode={false}
+              selectedRows={false}
+              rowSelection={false}
+              loading={listLoading}
+              data={data}
+              // onSelectRow={this.handleSelectRows}
+              onChange={this.handleStandardTableChange}
+              onView={this.handleView}
+            />
+          </Card>
+        </Layout>
+
+        <FormComp // 新建&编辑Modal
+          title={modal.modalType === 'new' ? '新增' : '查看'}
+          {...modal}
+          loading={submitLoading}
+          onCancelClick={() => this.handleModalVisible(false)}
+          submitForm={this.handleFormSubmit}
+        />
+
+
+
+      </div>)
+  }
+}
+
+export default IndexClassification

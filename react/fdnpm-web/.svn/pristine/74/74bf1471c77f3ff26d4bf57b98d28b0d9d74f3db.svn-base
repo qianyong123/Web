@@ -1,0 +1,109 @@
+import React, { PureComponent } from 'react'
+import { string, object, func, bool } from 'prop-types'
+import { Button, Modal, Tooltip, Icon, Row, Col, Divider } from 'antd'
+import moment from 'moment'
+
+import Styles from './index.less'
+
+const getValueFromUtils = (key, code) => {
+  const currentItem = optionItems[`${key}OptionItems`].find(item => item.code == code)
+  return currentItem ? currentItem.name : null
+}
+
+class ViewComp extends PureComponent {
+  static propTypes = {
+    item: object,
+    title: string.isRequired,
+    modalVisible: bool.isRequired,
+    onCancelClick: func.isRequired,
+  }
+  state = {}
+
+  static defaultProps = {
+    item: {},
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+    const { item, onSubmit } = this.props
+    const { id } = item
+    onSubmit(id)
+  }
+
+  render() {
+    const { loading } = this.state
+    const { title, modalVisible, onCancelClick, item } = this.props
+
+    return (
+      <Modal
+        destroyOnClose
+        title={title}
+        visible={modalVisible}
+        onOk={onCancelClick}
+        onCancel={onCancelClick}
+        width="800px"
+      >
+        <div>
+          <table className={Styles.table}>
+            <tbody>
+              <tr className={Styles.tableRow}>
+                <td className={Styles.tableCell}>监测年度</td>
+                <td className={Styles.tableCell}>{item.monitoringYear}</td>
+                <td className={Styles.tableCell}>监测站名称</td>
+                <td className={Styles.tableCell}>{item.stationName}</td>
+              </tr>
+              <tr className={Styles.tableRow}>
+                <td className={Styles.tableCell}>监测点名称</td>
+                <td className={Styles.tableCell}>{item.pointName}</td>
+                <td className={Styles.tableCell}>养殖品种</td>
+                <td className={Styles.tableCell}>{item.varietyName}</td>
+              </tr>
+              <tr className={Styles.tableRow}>
+                <td className={Styles.tableCell}>投饵量</td>
+                <td className={Styles.tableCell}>{item.putBaitAmount}</td>
+                <td className={Styles.tableCell}>投苗量</td>
+                <td className={Styles.tableCell}>{item.putSeedlingAmount}</td>
+              </tr>
+              <tr className={Styles.tableRow}>
+                <td className={Styles.tableCell}>COD</td>
+                <td className={Styles.tableCell}>{item.cod}</td>
+                <td className={Styles.tableCell}>用水量</td>
+                <td className={Styles.tableCell}>{item.useWaterAmount}</td>
+              </tr>
+              <tr className={Styles.tableRow}>
+                <td className={Styles.tableCell}>换水量</td>
+                <td className={Styles.tableCell}>{item.changeWaterAmount}</td>
+                <td className={Styles.tableCell}>氨氮</td>
+                <td className={Styles.tableCell}>{item.ammoniaNitrogen}</td>
+              </tr>
+              <tr className={Styles.tableRow}>
+                <td className={Styles.tableCell}>总氮</td>
+                <td className={Styles.tableCell}>{item.totalNitrogen}</td>
+                <td className={Styles.tableCell}>总磷</td>
+                <td className={Styles.tableCell}>{item.totalPhosphorus}</td>
+              </tr>
+              <tr className={Styles.tableRow}>
+                <td className={Styles.tableCell}>监测人</td>
+                <td className={Styles.tableCell}>{item.monitoringUser}</td>
+                <td className={Styles.tableCell}>监测时间段</td>
+                <td className={Styles.tableCell}>
+                  {item.monitoringPeriodStart &&
+                    item.monitoringPeriodEnd &&
+                    item.monitoringPeriodStart.replace(/-/g, '/') +
+                      '-' +
+                      item.monitoringPeriodEnd.replace(/-/g, '/')}
+                </td>
+              </tr>
+              <tr className={Styles.tableRow}>
+                <td className={Styles.tableCell}>状态</td>
+                <td className={Styles.tableCell} colSpan={3}>{item.dataStatus}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </Modal>
+    )
+  }
+}
+
+export default ViewComp

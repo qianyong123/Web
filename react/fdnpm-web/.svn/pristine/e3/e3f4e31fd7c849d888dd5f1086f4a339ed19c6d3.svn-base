@@ -1,0 +1,171 @@
+@import '~antd/lib/style/themes/default.less';
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.colorWeak {
+  filter: invert(80%);
+}
+
+.ant-layout {
+  min-height: 100vh;
+}
+
+canvas {
+  display: block;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:global {
+  .ant-upload.ant-upload-select {
+    width: 100%;
+  }
+  .ant-upload.ant-upload-select-picture-card {
+    width: 100% !important;
+    height: 150px !important;
+  }
+  .ant-table-small > .ant-table-content > .ant-table-body {
+    margin: 0 !important;
+  }
+  .ant-table .ant-table-small {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    .ant-table-placeholder {
+      background: none;
+    }
+  }
+  .ant-form .ant-form-item {
+    margin-bottom: 12px;
+  }
+  /* 扩展ant design pro按钮组件颜色 */
+  .ant-btn-warning {
+    // background-color: #ee8600;
+    // border-color: #ee8600;
+    background-color: #fa8c16;
+    border-color: #fa8c16;
+    color: #fff;
+    &:hover,
+    &:focus {
+      // background-color: #faad14;
+      // border-color: #faad14;
+      background-color: #ffa940;
+      border-color: #ffa940;
+      color: #fff;
+    }
+
+    &:active,
+    &.active {
+      // background-color: #d48806;
+      // border-color: #d48806;
+      background-color: #d46b08;
+      border-color: #d46b08;
+      color: #fff;
+    }
+  }
+  .ant-modal-header {
+    background: #f6fff9 !important;
+    border-color: #ebf6f4 !important;
+  }
+  .ant-modal-title {
+    color: #228a3a !important;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+  }
+}
+
+.globalSpin {
+  width: 100%;
+  margin: 40px 0 !important;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.tableActions {
+  min-width: 100px;
+  button {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.actionPanel {
+  padding: 15px 0 15px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  .button {
+    margin-left: 8px;
+  }
+}
+
+.modalFormActions {
+  margin-left: 20% !important;
+}
+@media (max-width: @screen-xs) {
+  .ant-table {
+    width: 100%;
+    overflow-x: auto;
+    &-thead > tr,
+    &-tbody > tr {
+      > th,
+      > td {
+        white-space: pre;
+        > span {
+          display: block;
+        }
+      }
+    }
+  }
+}
+.tableView {
+  border: 1px solid #edf1f3;
+  .oddRow,
+  .evenRow {
+    background: #fafbfc;
+    color: #333333;
+    display: flex;
+    font-size: 14px;
+    label,
+    span {
+      display: inline-block;
+      width: 30%;
+      border-right: 1px solid #edf1f3;
+      border-bottom: 1px solid #edf1f3;
+      text-align: center;
+      padding: 15px 20px;
+    }
+    span {
+      width: 70%;
+      text-align: left;
+    }
+  }
+  .evenRow {
+    background: #fff;
+  }
+}
+.modalFormTitle {
+  font-size: 18px;
+  color: #1a6636;
+  padding: 0 10px;
+  text-align: center;
+  span {
+    padding: 5px 10px;
+    background: #fff;
+  }
+}

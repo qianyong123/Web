@@ -1,0 +1,114 @@
+import React, { PureComponent } from 'react'
+import { string, object, func, bool } from 'prop-types'
+import { Button, Modal, Tooltip, Icon, Row, Col, Divider } from 'antd'
+
+import Styles from './view.less'
+// import moment from 'moment'
+// import Download from '@/components/Download'
+
+class ViewComp extends PureComponent {
+  static propTypes = {
+    item: object,
+    title: string.isRequired,
+    modalVisible: bool.isRequired,
+    onCancelClick: func.isRequired,
+  }
+  state = {}
+
+  static defaultProps = {
+    item: {},
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+    const { item, onSubmit } = this.props
+    const { id } = item
+    onSubmit(id)
+  }
+
+
+  render() {
+    const { loading } = this.state
+    const {
+      title,
+      modalVisible,
+      onCancelClick,
+      item,
+    } = this.props
+    // console.log(fileName)
+
+    return (
+      <Modal
+        destroyOnClose
+        title={title}
+        visible={modalVisible}
+        onOk={onCancelClick}
+        onCancel={onCancelClick}
+        width="800px"
+        footer={false}
+      >
+        <div>
+          <Row>
+            <Divider dashed style={{ color: '#1a6636' }}>
+              基本信息
+            </Divider>
+          </Row>
+          <table className={Styles.table}>
+            <tbody>
+            <tr className={Styles.tableRow}>
+              <td className={Styles.tableCell}>中文名</td>
+              <td className={Styles.tableCell}>{item.chineseName}</td>
+              <td className={Styles.tableCell}>学名</td>
+              <td className={Styles.tableCell}>{item.standardName}</td>
+            </tr>
+            <tr className={Styles.tableRow}>
+              <td className={Styles.tableCell}>英文名</td>
+              <td className={Styles.tableCell}>{item.englishName}</td>
+              <td className={Styles.tableCell}>俗名</td>
+              <td className={Styles.tableCell}>{item.generalName}</td>
+            </tr>
+            <tr className={Styles.tableRow}>
+              <td className={Styles.tableCell}>种属</td>
+              <td className={Styles.tableCellContent} colSpan={3}>{item.genusCategory}</td>
+            </tr>
+            <tr className={Styles.tableRow}>
+              <td className={Styles.tableCell}>中国保护级别</td>
+              <td className={Styles.tableCell}>{item.chinaProtectRankName}</td>
+              <td className={Styles.tableCell}>IUCN级别</td>
+              <td className={Styles.tableCell}>{item.iucnRankName}</td>
+            </tr>
+            <tr className={Styles.tableRow}>
+              <td className={Styles.tableCell}>物种简介</td>
+              <td className={Styles.tableCellContent} colSpan={3}>{item.speciesShortDesc}</td>
+            </tr>
+            <tr className={Styles.tableRow}>
+              <td className={Styles.tableCell}>形态特征</td>
+              <td className={Styles.tableCellContent} colSpan={3}>{item.morphologicalCharacteristics}</td>
+            </tr>
+            <tr className={Styles.tableRow}>
+              <td className={Styles.tableCell}>地理分布</td>
+              <td className={Styles.tableCellContent} colSpan={3}>{item.geographicalDistribution}</td>
+            </tr>
+            <tr className={Styles.tableRow}>
+              <td className={Styles.tableCell}>保护现状</td>
+              <td className={Styles.tableCellContent} colSpan={3}>{item.protectState}</td>
+            </tr>
+            <tr className={Styles.tableRow}>
+              <td className={Styles.tableCell}>照片</td>
+              <td className={Styles.tableCellContent} colSpan={3}>
+                {
+                  item.photoUrls && item.photoUrls.split(',').map((i) => (
+                    <img src={i} key={i} style={{width:100,height:80,marginLeft:10}}/>
+                  ))
+                }
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </Modal>
+    )
+  }
+}
+
+export default ViewComp

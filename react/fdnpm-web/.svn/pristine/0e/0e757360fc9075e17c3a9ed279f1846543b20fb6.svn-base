@@ -1,0 +1,255 @@
+import React, { Component } from 'react'
+import { connect } from 'dva'
+import { Layout, Button, Modal, message, Card, BackTop } from 'antd'
+import { getTableFiltersValue } from '@/utils/utils'
+import Authorized from '@/utils/Authorized'
+import globalStyles from '@/global.less'
+import Filter from './Filter'
+import TableList from './Table'
+import FormComp from './Form'
+
+const { Content } = Layout
+
+@connect(({ constructionClassification, loading }) => {
+  return {
+    constructionClassification,
+    listLoading: loading.effects['constructionClassification/fetch'],
+    subLoading:loading.effects['constructionClassification/add']||loading.effects['constructionClassification/update']
+  }
+})
+
+  /**
+   *@Date:2020/4/23
+   *@Features: 建设分类页面
+   */
+class ConstructionClassification extends Component {
+  constructor(props) {
+    super(props)
+    const { selectedIds } = props
+    this.state = {
+      selectedRows: selectedIds,
+      modal: {
+        item: {},
+        modalType: 'new',
+        modalVisible: false,
+      },
+      filterFormValues:{}
+    }
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props
+    this.requestList()
+    // dispatch({
+    //   type: 'dataAuditing/fetch',
+    //   payload: {
+    //     pageSize: 10,
+    //     pageNo: 1,
+    //   },
+    // })
+  }
+
+  requestList = (params = {}) => {
+    const { dispatch } = this.props
+    dispatch({
+      type: 'constructionClassification/fetch',
+      payload: {
+        pageSize: 10,
+        pageNum: 1,
+        ...params,
+      },
+    })
+  }
+
+  handleStandardTableChange = (pagination, filtersArg, sorter) => {
+    const { filterFormValues } = this.state
+
+    const filters = getTableFiltersValue(filtersArg)
+
+    const params = {
+      // pageNum: (pagination.current - 1) * pagination.pageSize,
+      pageNum: pagination.current,
+      pageSize: pagination.pageSize,
+      ...filterFormValues,
+      ...filters,
+    }
+    if (sorter.field) {
+      params.sorter = `${sorter.field}_${sorter.Refund}`
+    }
+
+    this.requestList(params)
+  }
+
+  handleModalVisible = (visible = {}, type, data, target) => {
+    const modalProps =
+      typeof visible === 'boolean'
+        ? {
+          modalVisible: visible,
+          modalType: type,
+          item: data,
+          modalTarget: target,
+        }
+        : { ...visible }
+
+    const { modalVisible, modalType, item, modalTarget = 'modal' } = modalProps
+
+    this.setState(() => ({
+      [`${modalTarget}`]: {
+        modalVisible: modalVisible || false,
+        modalType: modalType || 'new',
+        item: item || {},
+      },
+    }))
+  }
+
+  handleSearch = (values) => {
+    this.setState({
+      filterFormValues: values,
+    })
+
+    this.requestList(values)
+  }
+
+  handleFormReset = () => {
+    this.setState({
+      filterFormValues: {},
+    })
+
+    this.requestList()
+  }
+
+  handleFormSubmit = (id, values) => {
+    if (id) {
+      this.handleUpdate({ id, ...values })
+    } else {
+      this.handleAdd(values)
+    }
+  }
+
+  // 添加
+  handleAdd = values => {
+    const { dispatch } = this.props
+    dispatch({
+      type: 'constructionClassification/add',
+      payload: values,
+      callback: () => {
+        message.success('添加成功')
+        this.handleModalVisible(false)
+        this.requestList()
+      },
+    })
+  }
+
+  // update
+  handleUpdate = (values) => {
+    const { dispatch } = this.props
+    dispatch({
+      type: 'constructionClassification/update',
+      payload: values,
+      callback: () => {
+        message.success('修改成功')
+        this.handleModalVisible(false)
+        this.requestList()
+      },
+    })
+  }
+
+  /**
+   *@Features:编辑
+   */
+  handleEdit = async (id) => {
+    // console.log(id)
+    const { dispatch } = this.props
+    const rowItem = await dispatch({
+      type: 'constructionClassification/fetchDetail',
+      payload: { id },
+    })
+    // console.log(rowItem)
+    this.handleModalVisible(true, 'edit', rowItem)
+  }
+
+  /**
+   *@Features:删除
+   */
+  handleDelete = (id) => {
+    const self = this
+    const { dispatch } = this.props
+    Modal.confirm({
+      title: '确定要删除这个数据吗？',
+      content: '删除后，无法恢复。',
+      okType: 'danger',
+      okText: '删除',
+      cancelText: '取消',
+      onOk() {
+        dispatch({
+          type: 'constructionClassification/remove',
+          payload: {
+            id,
+          },
+          callback: () => {
+            message.success('删除成功')
+            self.requestList()
+          },
+        })
+      },
+    })
+  }
+
+  render() {
+    const { selectedRows, modal } = this.state
+    const {
+      constructionClassification: { data },
+      listLoading,
+      subLoading,
+      // district: { pickerList = [] },
+    } = this.props
+
+    return (
+      <div>
+        <Layout>
+          <Card bordered={false} style={{ marginBottom: 20 }}>
+            <Filter
+              onSearch={this.handleSearch}
+              resetForm={this.handleFormReset}
+            />
+          </Card>
+          <Card bordered={false}>
+            <div style={{ marginBottom: 5 }}>
+              <span>共有<b>{data.pagination.total}</b>条信息，共<b>{Math.ceil(data.pagination.total / data.pagination.pageSize) || 0}</b>
+                页
+              </span>
+              <Button
+                icon="plus"
+                className={globalStyles.button}
+                onClick={() => this.handleModalVisible(true)}
+                style={{ background: '#ee9800', color: '#fff', float: 'right', marginBottom: 20 }}
+              >
+                新增指标
+              </Button>
+            </div>
+            <TableList
+              selectedMode={null}
+              selectedRows={null}
+              rowSelection={null}
+              loading={listLoading}
+              data={data}
+              // onSelectRow={this.handleSelectRows}
+              onChange={this.handleStandardTableChange}
+              onDelete={this.handleDelete}
+              onEdit={this.handleEdit}
+            />
+          </Card>
+        </Layout>
+
+        <FormComp  // 新建&编辑Modal
+          title={modal.modalType === 'new' ? '建设分类新增' : '建设分类编辑'}
+          {...modal}
+          loading={subLoading}
+          onCancelClick={() => this.handleModalVisible(false)}
+          submitForm={this.handleFormSubmit}
+        />
+      </div>)
+  }
+}
+
+export default ConstructionClassification
