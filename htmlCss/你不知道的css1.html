@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            user-select: none; /* 文本不能被选中*/
+        }
+
+        div {
+            margin: 20px;
+        }
+
+        /* 
+       给父元素设置
+       Font-Size：0来清除间距 
+       
+       */
+        .tags-select {
+            font-size: 0;
+        }
+
+        .tags-select>.tag-select {
+            display: inline-block;
+            font-size: 14px;
+            margin: 5px;
+            position: relative;
+            font-weight: normal;
+
+        }
+
+        .tags-select>.tag-select .name {
+            display: block;
+            line-height: 20px;
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .tag-select .input1[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            z-index: -1;
+        }
+
+        .tag-select .input1[type="radio"]:checked+.name {
+            border-color: #e3393c;
+        }
+
+        .tag-select .input1[type="radio"]:disabled+.name {
+            background: #eee;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        /* 
+            绘制三角形
+        */
+        .border-arrow {
+            width: 256px;
+            height: 256px;
+            border: 48px solid;
+            border-top-color: red;
+            border-right-color: blue;
+            border-bottom-color: green;
+            border-left-color: orange;
+        }
+
+        .border-arrow2 {
+            width: 0;
+            height: 0;
+            border-width: 96px;
+        }
+
+        .border-arrow3 {
+            width: 0;
+            height: 0;
+            border: 72px solid;
+            border-color: transparent transparent transparent orange;
+        }
+
+        .border-arrow4 {
+            width: 256px;
+            height: 256px;
+            border: 64px solid;
+            border-color: red transparent transparent transparent;
+        }
+
+        /* 
+        用垂直方向的Padding来实现等比缩放的盒子
+        padding-top是相当于父元素的宽度的百分比
+        */
+        .ul {
+            display: flex;
+        }
+
+        .ul>li {
+            width: 100px;
+            height: 100px;
+            list-style-type: none;
+            margin-right: 10px;
+        }
+
+        .image-aspect-ratio {
+            width: 100%;
+            position: relative;
+            padding-top: 75%;
+
+        }
+
+        .image-aspect-ratio>img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /*
+            用Pointer-Event来禁用事件
+            pointer-event属性更像是一个JavaScript事件，利用该属性，可以做如下的事情：
+
+            阻止任何点击动作的执行
+            使链接显示为默认光标(cursor:default)
+            阻止触发hover和active状态
+            阻止JavaScript点击事件的触发
+        */
+
+
+        ol {
+            counter-reset: decimal;
+            list-style-type: none;
+
+        }
+
+        ol li::before{
+                counter-increment: decimal;
+                content: counters(decimal, '.') ' ';
+            }
+        
+        /*
+        用Table-Layout来控制表格单元格宽度
+        你也许遇到过给表格设置了宽度，但是不起作用的问题。这是因为单元格的宽度是根据其内容进行调整的。刨根揭底，是因为表格有个叫做table-layout的属性，其浏览器默认值是auto在作怪。当我们把这个值设置为fixed的时候，我们给th/td标签设置的宽度就起作用了
+        */
+        table {
+        table-layout: fixed;
+        width: 100%;
+        border: 1px solid #e8e8e8;
+        border-collapse: collapse;
+        }
+        table th,td{
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            border: 1px solid #e8e8e8;
+        }
+        /*
+        改变输入框光标的颜色
+        */
+        input,
+        textarea,
+        [contenteditable] {
+        caret-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tags-select">
+        <label class="tag-select">
+            <input class="input1" type="radio" name="bye-type" value="1">
+            <span class="name">官方标配</span>
+        </label>
+        <label class="tag-select">
+            <input class="input1" type="radio" name="bye-type" value="2" checked>
+            <span class="name">移动优惠购</span>
+        </label>
+        <label class="tag-select">
+            <input class="input1" type="radio" name="bye-type" value="3" disabled>
+            <span class="name">联通优惠购</span>
+        </label>
+    </div>
+
+    <div class="border-arrow"></div>
+    <div class="border-arrow border-arrow2"></div>
+    <div class="border-arrow border-arrow3"></div>
+    <div class="border-arrow border-arrow4"></div>
+    <ul class="ul">
+        <li>
+            <div class="image-aspect-ratio">
+                <img src="./img/juzi.png">
+            </div>
+        </li>
+        <li>
+            <div class="image-aspect-ratio">
+                <img src="./img/juzi.png">
+            </div>
+        </li>
+        <li>
+            <div class="image-aspect-ratio">
+                <img src="./img/juzi.png">
+            </div>
+        </li>
+    </ul>
+
+    <ol>
+        <li>
+            <ol>
+                <li>dasd</li>
+                <li>dasd</li>
+            </ol>
+        </li>
+        <li>列表2</li>
+        <li>列表3</li>
+    </ol>
+    <table>
+        <thead>
+            <th style="width:100px;">列表1111111111111112</th>
+            <th>列表2</th>
+        </thead>
+        <tbody>
+            <tr><td>asdas</td></tr>
+            <tr><td>asdasd</td></tr>
+
+        </tbody>
+    </table>
+    <input type="text">
+</body>
+
+</html>

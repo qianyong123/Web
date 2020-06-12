@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>音乐</title>
+</head>
+
+<body>
+    
+    <audio id="audio" controls="controls" loop autoplay src="./quanshiai.mp3">
+        您的浏览器不支持 audio 标签。
+    </audio>
+    <video autoplay controls width="400" height="300">
+
+        <source src="饥饿站台.mp4" type="video/mp4">
+    
+        <object id="flowplayer" width="400" height="300"
+    
+            data="flowplayer-3.2.18.swf"
+    
+            type="application/x-shockwave-flash">
+    
+            <param name="movie" value="flowplayer-3.2.18.swf">
+    
+            <param name="flashvars" value='config={"clip":"饥饿站台.mp4"}'>
+    
+        </object>
+    
+    </video>
+    <!-- <video src="【天天电影天堂www.ttdytt.cc】饥饿站台.El.hoyo.2019.HD720P.西班牙语中字.mp4" autoplay controls width="500" height="400"></video> -->
+    <script>
+        /* 
+            audio谷歌浏览器不支持自动播放
+            src  是歌曲的路径
+            controls  播放控制 如果给标签里写了 controls="controls" 那么网页会显示audio自带的播放控件，如果没写就不会显示.
+            loop 歌曲循环 在标签里添加该属性歌曲循环 如果你的歌曲是从后台调取的的 也可以在ajax里设置 loop=true/false来控制;
+            autoplay 当歌曲加载后自动播放，但是只有pc端可以实现 移动端不行(pc端的浏览器要比移动端的完善很多，对有些属性支持也会好很多)
+            以上是标签内的属性 当然也可以作为对象属性来调取控制auido.*
+
+            audio不单单是个标签 他也是window下的一个对象，对象就有属性和方法，作为对象他有哪些常用的方法呢
+            对象属性：
+            currentTime 获取当前播放时间
+            duration 获取歌曲的总时间
+            play 是否在播放 返回true/false
+            pause 是否暂停 返回true/false
+            对象方法：
+            play() 播放歌曲
+            pause() 暂停歌曲
+            load()重新加载歌曲 
+        */
+        function musicAutoPlay() {
+            let music = document.getElementById('audio')//获取audio
+            if (music.paused) {//判断一下paused（pused为真是禁用的）
+                music.play()//调用播放
+            }
+        }
+        musicAutoPlay()
+        // setInterval("musicAutoPlay()", 10);//必须使用一个时间函数 ，不触发的情况下还是报错
+    </script>
+</body>
+
+</html>

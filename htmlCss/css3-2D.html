@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css3-2D</title>
+    <style>
+        div {
+            width: 50px;
+            height: 50px;
+            border: 1px solid;
+        }
+
+        .box {
+            width: 500px;
+            height: 600px;
+            margin: 50px auto;
+        }
+
+        /*
+            通过 translate() 方法，元素从其当前位置移动，根据给定的 left（x 坐标） 和 top（y 坐标） 位置参数：
+        */
+        .box1 {
+            transform: translate(20px, 10px);
+            -ms-transform: translate(50px, 100px);
+            /* IE 9 */
+            -webkit-transform: translate(50px, 100px);
+            /* Safari and Chrome */
+            -o-transform: translate(50px, 100px);
+            /* Opera */
+            -moz-transform: translate(50px, 100px);
+            /* Firefox */
+        }
+
+        /*
+             通过 rotate() 方法，元素顺时针旋转给定的角度。允许负值，元素将逆时针旋转。
+        */
+        .box2{
+            transform: rotate(30deg);
+        }
+          /*
+            通过 scale() 方法，元素的尺寸会增加或减少，根据给定的宽度（X 轴）和高度（Y 轴）参数：
+        */
+        .box3{
+            transform: scale(2,4);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <!-- <div class="box1"></div> -->
+        <div class="box2">大家好</div>
+        <div class="box3">大家好</div>
+    </div>
+</body>
+
+</html>

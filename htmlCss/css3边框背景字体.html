@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css3</title>
+    <style>
+        body{
+            display: flex;
+            flex-wrap: wrap;
+            padding: 50px;
+        }
+        div,ul{
+            width: 100px;
+            height: 100px;
+            margin: 0 20px 20px 0;
+            border: 1px solid;
+        }
+        .ul{
+            width: 100px;
+            height: 100px;
+            border: 1px solid;
+            padding: 5px;          
+        }
+        .ul>li{
+            list-style-type: none;
+        }
+        .ul>li:nth-child(Odd){
+            color: #f00;
+        }
+        .ul>li:nth-child(even){
+            color: rgb(68, 0, 255);
+        }
+        .box{
+            border:2px solid #f00;
+            height: 30px;
+            border-radius:30px;
+            background: #09f;
+            box-shadow: -10px 10px 5px #888888;
+            /* 
+            这段代码表示阴影的水平位置为右移10px；
+
+            垂直位置为下移10px；
+
+            第三个10px代表阴影的模糊程度blur，我们也将它设置成20px；
+
+            第四个10px是阴影半径的意思；最后一个规定了阴影的颜色。
+            */
+        }
+        .box2{ 
+            /* 
+             background-size 设置背景图大小 宽、高
+            background-origin 属性规定背景图片的定位区域。
+            背景图片可以放置于 content-box、padding-box 或 border-box 区域。
+            */
+            background: url('./img/juzi.png') no-repeat;
+            background-size: 50px 50px;
+            background-origin:padding-box;
+            padding: 20px;
+        }
+        /* 
+        在新的 @font-face 规则中，您必须首先定义字体的名称（比如 myFirstFont）
+            @font-face
+            {
+            font-family: myFirstFont;
+            src: url('Sansation_Light.ttf'),
+                url('Sansation_Light.eot'); /* IE9+
+            ｝ 
+            div
+            {
+            font-family:myFirstFont;
+            }  
+         */
+    </style>
+</head>
+<body>
+        <ul class="ul">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <div class="box">
+        </div>
+        <div class="box2">
+        </div>
+</body>
+</html>

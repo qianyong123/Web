@@ -43,6 +43,19 @@ export default [
         component: './L7TC/index',
         icon: 'disconnect',
       },
+      {
+        path: '/Antd',
+        name: 'antd',
+        icon: 'disconnect',
+        routes:[
+          {
+            path: '/Antd/Transfer',
+            name: '穿梭框',
+            component: './Antd/Transfer/index',
+            icon: 'disconnect',
+          },
+        ]
+      },
       // {
       //   path: '/InformationMonitoring',
       //   name: '采集信息',

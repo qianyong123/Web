@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css3动画效果</title>
+    <style>
+        /* 
+            动画是使元素从一种样式逐渐变化为另一种样式的效果。
+
+            您可以改变任意多的样式任意多的次数。
+
+            请用百分比来规定变化发生的时间，或用关键词 "from" 和 "to"，等同于 0% 和 100%。
+
+            0% 是动画的开始，100% 是动画的完成。
+
+            为了得到最佳的浏览器支持，您应该始终定义 0% 和 100% 选择器。
+
+
+            @keyframes	规定动画。	3
+            animation	所有动画属性的简写属性，除了 animation-play-state 属性。	3
+            animation-name	规定 @keyframes 动画的名称。	3
+            animation-duration	规定动画完成一个周期所花费的秒或毫秒。默认是 0。	3
+            animation-timing-function	规定动画的速度曲线。默认是 "ease"。	3
+            animation-delay	规定动画何时开始。默认是 0。	3
+            animation-iteration-count	规定动画被播放的次数。默认是 1。infinite 无线循环 
+            animation-direction	规定动画是否在下一周期逆向地播放。默认是 "normal" 正常。	alternate 逆向
+            animation-play-state	规定动画是否正在运行或暂停。默认是 "running"。	3
+            animation-fill-mode	规定对象动画时间之外的状态。
+        */
+        body{
+            padding: 50px;
+        }
+        @keyframes myfirst{
+            from {background: red;position: relative; left: 0;display: block;}
+            /* 25%  {background: yellow;}
+            50%  {background: blue;} */
+            to {background: green;position: relative; left: 100%;display: none;}
+        }
+
+        .box1{
+            width: 200px;
+            height: 100px;
+            background: #09f;
+            animation: myfirst 4s;
+            animation-iteration-count:infinite;
+            animation-direction:alternate;
+        }
+        .box1:hover{
+           /* display: none; */
+        }
+    </style>
+</head>
+<body>
+    <div class="box1">
+
+    </div>
+</body>
+</html>

@@ -1,8 +1,0 @@
-.columnSetting {
-  :global {
-    .ant-checkbox-group-item {
-      display: block;
-      margin-bottom: 0.5em;
-    }
-  }
-}

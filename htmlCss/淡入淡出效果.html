@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>淡入淡出效果</title>
+    <style>
+        @keyframes myfirst{
+            from {opacity:1}
+            25%  {background: yellow;}
+            50%  {background: #f00;} 
+            to {opacity:0}
+        }
+        div{
+            width: 300px;
+            height: 200px;
+            background-color: #f00;
+            transition:opacity 2s;
+            /* animation: myfirst 4s;
+            animation-iteration-count:infinite; */
+            /* animation-direction:alternate; */
+        }
+    
+
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <button id="btn" onclick="btn()">点击</button>
+    <script>
+        const box = document.getElementById('box')
+        let opt = 1
+         function getStyle(Element,Property){
+            return Element.currentStyle ? Element.currentStyle[Property] : getComputedStyle(ELement)[Property];
+        }
+        function btn (){
+            if(opt) {
+                box.style.opacity = 0
+                opt = 0
+            } else{
+                box.style.opacity = 1
+                opt = 1
+            }
+        }
+        // setInterval(btn,3000)
+       
+    </script>
+</body>
+</html>

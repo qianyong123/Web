@@ -1,6 +1,0 @@
-:global {
-  .ant-upload.ant-upload-select-picture-card {
-    width: 104px !important;
-    height: 104px !important;
-  }
-}

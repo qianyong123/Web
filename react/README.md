@@ -77,7 +77,10 @@ isSame() 检查一个 moment 是否与另一个 moment 相同。 第一个参数
 isAfter() 检查一个 moment 是否在另一个 moment 之后。 第一个参数会被解析为 moment
 moment('2010-10-20').isBefore('2010-10-21'); // true
 
-
+### recompose
+它提供了一系列小而美的高阶函数，可以简化我们平常编写的代码，可以吧多个高阶组件组合起来
+import { compose } from 'recompose';
+compose(name1,name2)(组件名字)
 
 
 

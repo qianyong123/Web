@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>css3过度动画</title>
+    <style>
+        /*
+            transition	简写属性，用于在一个属性中设置四个过渡属性。	3
+            transition-property	规定应用过渡的 CSS 属性的名称。	3
+            transition-duration	定义过渡效果花费的时间。默认是 0。	3
+            transition-timing-function	规定过渡效果的时间曲线。默认是 "ease"。	3
+            transition-delay	规定过渡效果何时开始。默认是 0。
+
+            如需向多个样式添加过渡效果，请添加多个属性，由逗号隔开：
+        */
+        .box{
+            width: 100px;
+            height: 50px;
+            background: #09f;
+            transition: width 2s, height 2s, transform 2s;
+        }
+        .box:hover{
+            width: 200px;
+            height: 300px;
+            transform:translate(50px,50px)
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+
+    </div>
+</body>
+</html>
