@@ -10,13 +10,13 @@ AntV 是一个数据可视化项目，也是一个团队，蚂蚁金服数据可
 https://l7.antv.vision/zh/docs/api/react/scene 
 
 ### prop-types 
-可以对父组件传来的props进行检查
-//安装
-npm install prop-types --save
-//引入
-import PropTypes from 'prop-types';
 
-optionalArray: PropTypes.array,
+1. npm install prop-types --save
+可以对父组件传来的props进行检查
+
+2. import PropTypes from 'prop-types';
+
+3. optionalArray: PropTypes.array,
 optionalBool: PropTypes.bool,
 optionalFunc: PropTypes.func,
 optionalNumber: PropTypes.number,
@@ -24,7 +24,7 @@ optionalObject: PropTypes.object,
 optionalString: PropTypes.string,
 optionalSymbol: PropTypes.symbol,
 
-使用isRequired设置属性为必须传递的值
+4. 使用isRequired设置属性为必须传递的值
 Greeting('组件名字').defaultProps = {
   name: 'Stranger'
 };
@@ -50,17 +50,17 @@ class Greeting extends React.Component {
 }
 
 ### js-cookie
-npm install js-cookie --save
-import Cookies from 'js-cookie'
-1.存到Cookie去
+1. npm install js-cookie --save
+2. import Cookies from 'js-cookie'
+3. 存到Cookie去
 Cookies.set('name', 'value');
 Cookies.set('name', 'value', { expires: 7 });
 Cookies.set('name', 'value', { expires: 7, path: '' });
-2.在Cookie中取出
+4. 在Cookie中取出
 Cookies.get('name'); // => 'value'
 Cookies.get('nothing'); // => undefined
 Cookies.get(); // => { name: 'value' }
-3.删除
+5. 删除
 // Delete cookie:
 Cookies.remove('name');
 Cookies.set('name', 'value', { path: '' });
@@ -68,14 +68,14 @@ Cookies.remove('name'); // fail!
 Cookies.remove('name', { path: '' }); // removed!
 
 ### moment
-npm install moment --save 
-import moment from 'moment'
-moment().format('MMMM Do YYYY, h:mm:ss a'); // 五月 22日 2020, 2:10:53 下午
-moment().format('YYYY-MM-DD'); // 2020-05-22
-isBefore()  检查一个 moment 是否在另一个 moment 之前。 第一个参数会被解析为 moment
-isSame() 检查一个 moment 是否与另一个 moment 相同。 第一个参数会被解析为 moment
-isAfter() 检查一个 moment 是否在另一个 moment 之后。 第一个参数会被解析为 moment
-moment('2010-10-20').isBefore('2010-10-21'); // true
+1. npm install moment --save 
+2. import moment from 'moment'
+3. moment().format('MMMM Do YYYY, h:mm:ss a'); // 五月 22日 2020, 2:10:53 下午
+4. moment().format('YYYY-MM-DD'); // 2020-05-22
+5. isBefore()  检查一个 moment 是否在另一个 moment 之前。 第一个参数会被解析为 moment
+6. isSame() 检查一个 moment 是否与另一个 moment 相同。 第一个参数会被解析为 moment
+7. isAfter() 检查一个 moment 是否在另一个 moment 之后。 第一个参数会被解析为 moment
+8. moment('2010-10-20').isBefore('2010-10-21'); // true
 
 ### recompose
 它提供了一系列小而美的高阶函数，可以简化我们平常编写的代码，可以吧多个高阶组件组合起来
