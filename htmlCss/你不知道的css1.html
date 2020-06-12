@@ -11,7 +11,8 @@
             padding: 50px;
             display: flex;
             flex-wrap: wrap;
-            user-select: none; /* 文本不能被选中*/
+            user-select: none;
+            /* 文本不能被选中*/
         }
 
         div {
@@ -140,34 +141,37 @@
 
         }
 
-        ol li::before{
-                counter-increment: decimal;
-                content: counters(decimal, '.') ' ';
-            }
-        
+        ol li::before {
+            counter-increment: decimal;
+            content: counters(decimal, '.') ' ';
+        }
+
         /*
         用Table-Layout来控制表格单元格宽度
         你也许遇到过给表格设置了宽度，但是不起作用的问题。这是因为单元格的宽度是根据其内容进行调整的。刨根揭底，是因为表格有个叫做table-layout的属性，其浏览器默认值是auto在作怪。当我们把这个值设置为fixed的时候，我们给th/td标签设置的宽度就起作用了
         */
         table {
-        table-layout: fixed;
-        width: 100%;
-        border: 1px solid #e8e8e8;
-        border-collapse: collapse;
+            table-layout: fixed;
+            width: 100%;
+            border: 1px solid #e8e8e8;
+            border-collapse: collapse;
         }
-        table th,td{
+
+        table th,
+        td {
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
             border: 1px solid #e8e8e8;
         }
+
         /*
         改变输入框光标的颜色
         */
         input,
         textarea,
         [contenteditable] {
-        caret-color: red;
+            caret-color: red;
         }
     </style>
 </head>
@@ -226,12 +230,39 @@
             <th>列表2</th>
         </thead>
         <tbody>
-            <tr><td>asdas</td></tr>
-            <tr><td>asdasd</td></tr>
+            <tr>
+                <td>asdas</td>
+            </tr>
+            <tr>
+                <td>asdasd</td>
+            </tr>
 
         </tbody>
     </table>
     <input type="text">
+    <script>
+        function timeout(ms) {
+            return new Promise((resolve, reject) => {
+                setTimeout(resolve, ms, "finish");
+            });
+        }
+        async function asyncTimeSys() {
+            await timeout(1000);
+            console.log("第一层异步结束！")
+            await timeout(1000);
+            console.log("第二层异步结束！")
+            await timeout(1000);
+            console.log("第三层异步结束！")
+            await timeout(1000);
+            console.log("第四层异步结束！")
+            await timeout(1000);
+            console.log("第五层异步结束！")
+            return "all finish";
+        }
+        asyncTimeSys().then((value) => {
+            console.log(value);
+        });
+    </script>
 </body>
 
 </html>

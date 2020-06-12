@@ -5,7 +5,8 @@
     text-overflow: ellipsis;
 # 元素垂直居中的方式
 
-``` .wrapBox5{
+``` 
+    .wrapBox5{
         width: 300px;
         height: 300px;
         border:1px solid red;
