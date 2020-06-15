@@ -10,10 +10,19 @@
 </head>
 <body>
     <script>
-       const arr = [
-         new Date(2020,0,15)    //2020年1月15日
-       ]
-       console.log(arr)
+        const fun = function(){
+            const arr = []
+            for(var i=0;i<10;i++){
+                arr[i] = function(){return i}
+            }
+            return arr
+        }
+        var arr2 = fun()
+       console.log(
+        arr2[0](),
+        arr2[5](),          
+
+        )
     </script>
 </body>
 </html>

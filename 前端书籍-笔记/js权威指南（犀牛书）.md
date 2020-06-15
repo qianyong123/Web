@@ -1,5 +1,5 @@
-## 类型、值、变量
-* 十六进制：0x或OX为前缀，其后跟着十六进制数串的直接量。十六进制值是数字0~9，字母A（a）~F（f）之间的之母构成
+# 类型、值、变量
+
 ### 算数运算
     ```
     Math.pow(2,2),   // 2的53次方
@@ -13,6 +13,7 @@
     ```
 * Infinity 无穷大 有负和正
 * isNaN(x)   如果参数是NaN或者是一个非数字值（比如字符串和对象），则返回为true
+
 ### 日期和时间
 ```
     const arr = new Date(2020,0,15)    //2020年1月15日（中国标准时间）
@@ -23,4 +24,48 @@
     arr.getHours()  //当地时间
     arr.getUTCHours()   //使用UTC表示小时的时间
 ```
+
+* \n 换行
+* \t 水平制表符（空格）
+
+### 字符串的使用
+
+```
+    const z = "hello，world"
+    z.charAt(1) //获取第二个字符
+    z.substring(1,4) 
+    z.slice(-3) 
+    z.indexOf('e') 
+    z.lastIndexOf('e') 
+    z.split(',') 
+    s.replace('h','H') //全文字替换
+    z.toUpperCase() //全部转换为大写0
+```
+
+### 模式匹配
+
+```
+    const text = "hello，123fghfgh666";
+    var pat = /\d+/g; //匹配所有包含一个或多个数字的实例
+    pat.test(text) //true 匹配成功
+    text.search(pat) //首次匹配成功的位置 
+    text.match(pat) //所有匹配成功组成的数组
+    text.replace(pat,'*') //替换匹配成功的
+    text.split(/\D+/) //用非数字字符截取字符串
+```
+
+* null == undefined true; null === undefined false 
+* null和undefined都不包含任何属性和方法。实际上使用"," ，"[ ]"来存取这两个值的成员或方法都会产生一个类型错误。
+* 两个单独的对象或者两个单独的数组是永不相等的 
+
+# 表单式和运算符
+
+
+
+
+
+
+
+
+
 
