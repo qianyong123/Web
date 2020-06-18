@@ -1,7 +1,4 @@
-import {
-    Message,
-} from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+
 
 const chinese=/^[\u4e00-\u9fa5]*$/ //中文
 const number=/^[0-9]{4,16}$///全数字
@@ -16,7 +13,7 @@ export function regular(type,val,msg){
     switch(type){
         case 'chinese':
             if(!chinese.test(val)){           
-                Message({message:msg,type: 'error'})
+                alert('输入有误')
                 return false
             }else{              
                return true        
@@ -24,7 +21,7 @@ export function regular(type,val,msg){
             break;
         case 'number':
             if(!number.test(val)){           
-                Message({message:msg,type: 'error'})
+                alert('输入有误')
                 return false
             }else{              
                return true        
@@ -32,7 +29,7 @@ export function regular(type,val,msg){
             break;
         case 'number2':
             if(!number2.test(val)){           
-                Message({message:msg,type: 'error'})
+                alert('输入有误')
                 return false
             }else{              
                return true        
@@ -40,7 +37,7 @@ export function regular(type,val,msg){
             break;
          case 'letterNumber':
             if(!letterNumber.test(val)){           
-                Message({message:msg,type: 'error'})
+                alert('输入有误')
                 return false
             }else{              
                return true        
@@ -48,7 +45,7 @@ export function regular(type,val,msg){
             break;
         case 'password':
             if(!password.test(val)){           
-                Message({message:msg,type: 'error'})
+                alert('输入有误')
                 return false
             }else{              
                return true        
@@ -56,7 +53,7 @@ export function regular(type,val,msg){
             break;
         case 'username':
             if(!username.test(val)){           
-                Message({message:msg,type: 'error'})
+                alert('输入有误')
                 return false
             }else{              
                return true        
@@ -64,7 +61,7 @@ export function regular(type,val,msg){
             break;
         case 'phone':
             if(!phone.test(val)){           
-                Message({message:msg,type: 'error'})
+                alert('输入有误')
                 return false
             }else{              
                return true        
@@ -72,7 +69,7 @@ export function regular(type,val,msg){
             break;
         case 'azNumber':
             if(!azNumber.test(val)){           
-                Message({message:msg,type: 'error'})
+                alert('输入有误')
                 return false
             }else{              
                return true        
@@ -80,7 +77,7 @@ export function regular(type,val,msg){
             break;
         case 'certificate':
             if(!certificate.test(val)){           
-                Message({message:msg,type: 'error'})
+                alert('输入有误')
                 return false
             }else{              
                return true        

@@ -33,11 +33,11 @@
 ```
     const z = "hello，world"
     z.charAt(1) //获取第二个字符
-    z.substring(1,4) 
-    z.slice(-3) 
-    z.indexOf('e') 
-    z.lastIndexOf('e') 
-    z.split(',') 
+    z.substring(1,4) //截取
+    z.slice(-3) //截取
+    z.indexOf('e') //查找第一个出现的位置
+    z.lastIndexOf('e') //查找第最后一个出现的位置
+    z.split(',') //分割成数组
     s.replace('h','H') //全文字替换
     z.toUpperCase() //全部转换为大写0
 ```
