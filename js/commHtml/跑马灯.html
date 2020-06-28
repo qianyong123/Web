@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        /* 
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-1300px);
+
+            }
+        } */
+
+        .marquee div {
+            display: block;
+            width: 300px;
+            height: 35px;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 50px auto;
+            border: 1px solid #09f;
+            position: relative;
+        }
+
+    
+        #label_txt {
+            position: absolute;
+            top: 50%;
+            right: -100%;
+            margin-top: -13px;
+            width: auto;
+            height: 26px;
+            line-height: 26px;
+            /* -webkit-animation: marquee 10s linear infinite;
+            animation: marquee 10s linear infinite; */
+            color: #f00;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <div class="marquee">
+        <div id="marquee2">
+            <p id="label_txt">我是最后一个让我掉下眼泪的 不止昨夜的酒让我掉下眼泪的 不止昨夜的酒让我掉下眼泪的 不止昨夜的酒让我掉下眼泪的 不止昨夜的酒666</p>
+        </div>
+    </div>
+
+
+    <script>
+
+        let text = document.querySelector('#label_txt');
+        let div = document.querySelector('#marquee2');
+
+        let p = document.getElementById('label_txt')
+        //文本宽度
+        let textWidth = p.offsetWidth;
+        let divWidth = div.offsetWidth
+        console.log(textWidth,divWidth)
+        //动态在头部创建style标签
+        var oH = document.getElementsByTagName('head')[0];
+        var oS = document.createElement('style');
+        oH.appendChild(oS);
+        oS.innerHTML =
+            ` @keyframes marquee {
+                    0% {
+                        transform: translateX(0);
+                    }
+
+                    100% {
+                        transform: translateX(${-(textWidth+divWidth)}px);
+
+                    }
+                }`
+
+        p.style.width = `${textWidth}px`
+        p.style.right = `${-textWidth}px`
+        p.style.animation = 'marquee 15s linear infinite';
+
+
+    </script>
+
+</body>
+
+</html>

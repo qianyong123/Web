@@ -1,0 +1,162 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    height: 100vh;
+    background: url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114825&di=6f26ee95fc01fccc5d60509aef0e90af&imgtype=0&src=http%3A%2F%2Fdingyue.nosdn.127.net%2Fnqyz1FHPcxrsyPk5T9g96Ya3VUOslFKh0DvNh4emZhAqR1544162742684.jpg') no-repeat;
+    background-size: 100% 100%;
+}
+
+html:after {/*用于模糊背景图片*/
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: inherit;
+    filter: blur(5px);
+    z-index: 2;
+}
+
+.xc-wrap {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 200px auto 0;
+    transform-style: preserve-3d;
+    animation-name: rotate, rotateX, rotateY;/*三个动画顺序执行*/
+    animation-duration: 6s, 10s, 10s;
+    animation-timing-function: linear, linear, linear;
+    animation-delay: 0s, 6s, 16s;/*设置后一个动画的延迟时间为前一个动画的执行时间，保证每段动画都能执行*/
+    animation-iteration-count: infinite, infinite, infinite;
+    z-index: 3;
+}
+
+.xc-wrap .outer,
+.xc-wrap .inner {
+    position: absolute;
+}
+
+.xc-wrap .outer {
+    width: 300px;
+}
+
+.xc-wrap .inner {
+    width: 100px;
+    height: 100px;
+    left: 50px;
+    top: 50px;
+}
+
+.xc-wrap .inner li {
+    left: 0;
+    right: 0;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+    to {
+        transform: rotateY(360deg) rotateX(360deg);
+    }
+}
+
+@keyframes rotateY {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes rotateX {
+    from {
+        transform: rotateX(0deg);
+    }
+    to {
+        transform: rotateX(360deg);
+    }
+}
+
+.xc-wrap li {
+    position: absolute;
+    list-style: none;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.xc-wrap .outer li {
+    width: 200px;
+    height: 200px;
+}
+
+.xc-wrap .inner li {
+    width: 100px;
+    height: 100px;
+}
+
+.xc-wrap .outer li:nth-child(1) {
+    transform: translateZ(150px);
+    background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114827&di=5fc10b2e5911b97e672f99e3f4150bc0&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180727%2F2aba981f071c497789fd31b3d237c72a.jpeg);
+}
+
+.xc-wrap .outer li:nth-child(2) {
+    transform: translateZ(-150px) rotateY(180deg);
+    background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114826&di=f4ad293a61442cbc5a84dced4dac7b4f&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Ffront%2F617%2Fw677h740%2F20180911%2FYWw6-hiixpun6687496.jpg);
+}
+
+.xc-wrap .outer li:nth-child(3) {
+    transform: translateX(-150px) rotateY(-90deg);
+    background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114826&di=e4dd781b20950d539ac21dae4539639f&imgtype=0&src=http%3A%2F%2Fp2.ssl.cdn.btime.com%2Ft01cfbd3bc457adb231.jpg%3Fsize%3D532x454);
+}
+
+.xc-wrap .outer li:nth-child(4) {
+    transform: translateX(150px) rotateY(90deg);
+    background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114826&di=29052c40e3122af099c2050d620b61f4&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn%2F20171110%2F733b-fynstfh3452464.jpg);
+}
+
+.xc-wrap .outer li:nth-child(5) {
+    transform: translateY(-150px) rotateX(90deg);
+    background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114825&di=d696761fa9198ccf375182a0f8cc783f&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn%2Fw640h560%2F20180225%2Fb855-fyrwsqi0027891.jpg);
+}
+
+.xc-wrap .outer li:nth-child(6) {
+    transform: translateY(150px) rotateX(-90deg);
+    background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114825&di=a0021b45b5a05d0f8d67ab8c87d688bb&imgtype=0&src=http%3A%2F%2Fc1.haibao.cn%2Fimg%2F600_0_100_0%2F1517830030.8115%2F87df834e775be8df76922d9dc0f66687.jpg);
+}
+
+/* inner */
+.xc-wrap .inner li:nth-child(1) {
+    transform: translateZ(-50px);
+    background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114827&di=5fc10b2e5911b97e672f99e3f4150bc0&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180727%2F2aba981f071c497789fd31b3d237c72a.jpeg);
+}
+
+.xc-wrap .inner li:nth-child(2) {
+    transform: translateZ(50px) rotateY(180deg);
+    background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114826&di=f4ad293a61442cbc5a84dced4dac7b4f&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Ffront%2F617%2Fw677h740%2F20180911%2FYWw6-hiixpun6687496.jpg);
+}
+
+.xc-wrap .inner li:nth-child(3) {
+    transform: translateX(50px) rotateY(-90deg);
+    background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114826&di=e4dd781b20950d539ac21dae4539639f&imgtype=0&src=http%3A%2F%2Fp2.ssl.cdn.btime.com%2Ft01cfbd3bc457adb231.jpg%3Fsize%3D532x454);
+}
+
+.xc-wrap .inner li:nth-child(4) {
+    transform: translateX(-50px) rotateY(90deg);
+    background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114826&di=29052c40e3122af099c2050d620b61f4&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn%2F20171110%2F733b-fynstfh3452464.jpg);
+}
+
+.xc-wrap .inner li:nth-child(5) {
+    transform: translateY(50px) rotateX(90deg);
+    background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114825&di=d696761fa9198ccf375182a0f8cc783f&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn%2Fw640h560%2F20180225%2Fb855-fyrwsqi0027891.jpg);
+}
+
+.xc-wrap .inner li:nth-child(6) {
+    transform: translateY(-50px) rotateX(-90deg);
+    background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588933114825&di=a0021b45b5a05d0f8d67ab8c87d688bb&imgtype=0&src=http%3A%2F%2Fc1.haibao.cn%2Fimg%2F600_0_100_0%2F1517830030.8115%2F87df834e775be8df76922d9dc0f66687.jpg);
+}

@@ -61,6 +61,61 @@
 * null 和 undefined 都不包含任何属性和方法。实际上使用"," ，"[ ]"来存取这两个值的成员或方法都会产生一个类型错误。
 * 两个单独的对象或者两个单独的数组是永不相等的
 
+自己收藏的几个好玩牛逼的网站
+1、搜源码-方便找到你想要的一些源码，例如一些插件的js，免得去一些博客花钱去下载了
+链接: http://www.bvbcode.com/cn/.
+
+2、在线P图，不用下载或者等待photoshop打开，很爽的一个网站
+链接: https://www.uupoop.com/ps/.
+
+3、最全的jquery源码插件大全
+链接: http://www.jq22.com.
+
+4、在线的postwoman，测试接口方便至极
+链接: https://postwoman.io/.
+
+5、几个可以免费下载网站源码模板的网站
+链接: http://www.bootstrapmb.com/.
+链接: https://www.lanrenzhijia.com/.
+链接: http://www.dedecms.com/.
+链接: https://mb.yangqq.com/.（部分免费）
+
+6、几个可以接收短信验证码的网站，可以手机号注册一些网站账号…
+链接: http://www.z-sms.com/.
+链接: https://www.materialtools.com/.
+
+7、可以创建虚拟邮箱的网站，可以接收一些不重要的邮件或者用邮箱注册账号…
+链接: http://www.5-mail.com/.
+
+8、矢量图标-icon的网站，还是比较全的
+链接: https://www.iconfont.cn/.
+
+9、在线JSON 转换 Excel的网站，不用写脚本，直接导出就OK了
+链接: http://j2e.kpoda.com/.
+
+10、免费在线word、excel、图片和PDF之间互相转换及处理
+链接: http://www.pdfdo.com/.
+链接: https://app.xunjiepdf.com/.
+链接: https://smallpdf.com/.
+
+11、在线免费下载付费音乐。
+链接: http://music.ifkdy.com/.
+
+12、在线压缩图片，不失帧，压缩率平均达80%左右，很牛逼的一个网站
+链接: https://tinypng.com/.
+
+13、8个免费高清无版权图片网站！–收藏必备
+Pexels: https://www.pexels.com/.
+Stock up: https://www.sitebuilderreport.com/stock-up.
+别样网: https://www.ssyer.com/.
+Unsplash: https://unsplash.com/.
+Pixabay: https://pixabay.com/.
+StockSnap: https://stocksnap.io/.
+Magdeleine: https://magdeleine.co/.
+VisualHunt: https://visualhunt.com/.
+
+
+
 
 
 
