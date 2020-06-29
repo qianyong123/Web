@@ -1,28 +1,38 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        const fun = function(){
-            const arr = []
-            for(var i=0;i<10;i++){
-                arr[i] = function(){return i}
-            }
-            return arr
+        const promise = function (val) {
+            return new Promise((res, rej) => {
+                setTimeout(() => {
+                    if (val > 1) {
+                        res(val)
+                    } else rej(val)
+                }, 2000)
+            })
         }
-        var arr2 = fun()
-       console.log(
-        arr2[0](),
-        arr2[5](),          
+        const Axios = {
+            get: (val)=>{return promise(val)}
+        }
 
-        )
+        //  Axios.get(2).then(res=>{
+        //      alert(`res ${res}`)
+        //  })
+      async function as(){
+        const req = await Axios.get(68)
+        console.log(req)
+        console.log('33')
+    }
+      as()
     </script>
 </body>
+
 </html>
