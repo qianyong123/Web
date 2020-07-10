@@ -1,42 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'dva'
-import { Layout, Card, Button, Spin, Tooltip, Icon } from 'antd'
+import { Button, Spin, Tooltip, Icon } from 'antd'
 import { LineLayer, AMapScene, Marker } from '@antv/l7-react'
 
-import Authorized from '@/utils/Authorized' //权限
 
-const { Content } = Layout
 
-let areas = []
-const getArea = (area = [], areaId) => {
-  area.find(item => {
-    if (item.regionCode === areaId) {
-      return areas.push(item)
-    }
-    if (item.children && item.children.length) {
-      const finded = getArea(item.children, areaId)
-      if (finded) areas.push(item)
-      return finded
-    }
-    return null
-  })
-}
 
-function Map({ dispatch, district: { pickerList = [] } }) {
+function Map() {
   const [data, setData] = React.useState()
   const [marker, setMarker] = React.useState([])
   const [marker1, setMarker1] = React.useState([])
   const [loading, setLoading] = React.useState(false)
   const [addr, setAddr] = React.useState([])
 
-  const getAddrList = async () => {
-    const addrTree = await dispatch({ type: 'district/fetchAddr', payload: {} })
-
-    const dataList = await dispatch({ type: 'map/fetch', payload: {} })
-    console.log(addrTree)
-    console.log(dataList)
-  }
-
+ 
   React.useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
@@ -46,21 +23,12 @@ function Map({ dispatch, district: { pickerList = [] } }) {
       const raw = await response.json()
       setData(raw)
       setLoading(false)
-
-      // getAddrList()s
     }
     // 等待底层图层加载完毕 加载标点数据
     window.setTimeout(() => {
       fetchData()
     }, 500)
   }, [])
-
-  const add = () => {
-    marker.push([105, 33])
-    setMarker(marker)
-    initData()
-  }
-
   const initData = () => {
     const fetchData = async () => {
       const response = await fetch(
@@ -72,22 +40,15 @@ function Map({ dispatch, district: { pickerList = [] } }) {
     fetchData()
   }
 
-  const address = (
-    list,
-    { PROVINCE: province, PROVINCE_CITY: provinceCity, COUNTY_TOWN: countyTown } = item
-  ) => {
-    areas = []
-    const addrList = list ? list.children : []
-    // console.log(addrList)
-    let areaName = ''
-    if (province) {
-      getArea(addrList, province)
-      getArea(addrList, provinceCity)
-      getArea(addrList, countyTown)
-      areaName = areas.map(subItem => subItem.regionName).join(' / ')
-      return areaName
-    }
+  const add = () => {
+    marker.push([105, 33])
+    setMarker(marker)
+    initData()
   }
+
+
+
+ 
 
   // const arr = [120, 32];
 

@@ -98,7 +98,7 @@ class Welcome extends Component {
         <Layout>
           <Card bordered={false}>欢迎！</Card>
         </Layout>
-        <FormTerminal
+        {/* <FormTerminal
           title="总站用户信息完善"
           item={currentItem}
           modalVisible={data.flag === '0' && data.type === '0'}
@@ -131,7 +131,7 @@ class Welcome extends Component {
           accountType={data.type}
           submitForm={this.handleFormSubmit}
           onCancelClick={this.handleCancelClick}
-        />
+        /> */}
         <BackTop />
       </div>
     )

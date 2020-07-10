@@ -16,6 +16,10 @@ http://www.jq22.com/jquery-info122
 Highcharts；Echarts；Charts；D3
 * gitHub地址
 https://github.com/  qianyong123/qianyong1518
+* 第七下载是国内最新、最齐、最安全的软件下载基地！
+https://www.7down.com/
+* 阮一峰网络日志
+http://www.ruanyifeng.com/blog/archives.html
 
 
 

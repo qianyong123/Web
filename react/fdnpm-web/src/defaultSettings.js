@@ -9,7 +9,7 @@ module.exports = {
   menu: {
     disableLocal: true,
   },
-  title: '农业农村部农业生态与资源保护总站',
+  title: '后台系统',
   pwa: false,
   // Your custom iconfont Symbol script Url
   // eg：//at.alicdn.com/t/font_1039637_btcrd5co4w.js

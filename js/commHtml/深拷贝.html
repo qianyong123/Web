@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深拷贝</title>
+</head>
+
+<body>
+    <script>
+        const obj1 = {
+            name: 1,
+            fun: function () { },
+            obj: {
+                qq: 211,
+                arr: [1, 2]
+            }
+        }
+        const obj2 = JSON.parse(JSON.stringify(obj1))
+
+        function isObject(obj) {
+            return typeof obj === 'object' && obj != null;
+        }
+        function cloneDeep(source) {
+
+            if (!isObject(source)) return source; // 非对象返回自身
+
+            var target = Array.isArray(source) ? [] : {};
+            for (var key in source) {
+                // source.hasOwnProperty(key)
+                // 使用Object.prototype.hasOwnProperty.call(source, key) 是为了防止hasOwnProperty在对象上已经被声明了，会一直返回false。
+                if (Object.prototype.hasOwnProperty.call(source, key)) {
+                    if (isObject(source[key])) {
+                        target[key] = cloneDeep(source[key]); // 注意这里
+                    } else {
+                        target[key] = source[key];
+                    }
+                }
+            }
+            return target;
+        }
+        const obj3 = cloneDeep(obj1)
+
+        obj1.name = 5565
+        obj1.obj.arr[0] = 5565
+        var type = function (data) {
+            var toString = Object.prototype.toString;
+            var dataType = toString
+                .call(data)
+                .replace(/\[object\s(.+)\]/, "$1")
+                .toLowerCase()
+            return dataType
+        };
+
+        // console.log(
+        //     obj1,
+        //     obj3,
+        //     type(undefined),
+        // )
+
+        var length = 10;
+        function fun() {
+            console.log(this. length);
+        }
+
+        var objs = {
+            length:5,
+            methds:function(fun){
+                fun();
+                arguments[0]();
+            }
+        }
+        objs.methds(fun,1)
+             
+//输出是什么？
+    </script>
+</body>
+
+</html>

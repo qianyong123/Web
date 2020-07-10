@@ -131,12 +131,12 @@ class LoginPage extends Component {
         <div className={styles.wrapper}>
           <div className={styles.main_left}>
             <div className={styles.welcome}>
-              农业农村部农业生态与资源保护总站
+              后台系统
               <span>
                 <img alt="" style={{ margin: '-6px 0 0 6px' }} src={url} />
               </span>
             </div>
-            <div className={styles.depict}>水生生物自然保护区信息子系统</div>
+            <div className={styles.depict}></div>
           </div>
           <div className={styles.main_right}>
             <Login

@@ -10,19 +10,22 @@
 
 <body>
     <script>
-        const arr = [1, 2, 33, 55, 66, 11,1,11,2]
-     
-       let max =  arr.reduce((v, v2,index)=>{
-           return Math.max(v,v2)
-       }) 
-       let max2=  arr.reduce((v, v2,index)=>{
-           !v.includes(v2) && v.push(v2)
-           return v
-       },[]) 
-        console.log(
-            'max',max,max2,'\n',
-            Array('454')
-           )
+      　　var name = "The Window";
+
+    　　var object = {
+    　　　　name : "My Object",
+
+    　　　　getNameFunc : function(){
+                let that = this
+    　　　　　　return function(){
+    　　　　　　　　return that.name;
+    　　　　　　};
+
+    　　　　}
+
+    　　};
+
+　　    alert(object.getNameFunc()());
     </script>
 </body>
 
