@@ -31,12 +31,12 @@ export default [
         component: './Welcome/index',
         hideInMenu: true,
       },
-      {
-        path: '/AGraphic',
-        name: 'L7地图',
-        component: './AGraphic/index',
-        icon: 'disconnect',
-      },
+      // {
+      //   path: '/AGraphic',
+      //   name: 'L7地图',
+      //   component: './AGraphic/index',
+      //   icon: 'disconnect',
+      // },
       {
         path: '/L7TC',
         name: '行政区域-填充图',
@@ -50,18 +50,62 @@ export default [
         icon: 'disconnect',
       },
       {
+        path: '/Amap',
+        name: '高德地图',
+        icon: 'disconnect',
+        routes:[
+          {
+            path: '/Amap/Marker',
+            name: 'Marker',
+            component: './Amap/Marker/index',
+          },
+          // {
+          //   path: '/Amap/AdministrativeRegion',
+          //   name: '行政区地图',
+          //   component: './Amap/AdministrativeRegion/index',
+          // },
+          {
+            path: '/Amap/SpatialAnalysis',
+            name: '行政区钻孔地图',
+            component: './Amap/SpatialAnalysis/index',
+          },
+          
+        ]
+      },
+      {
         path: '/Antd',
-        name: 'antd',
+        name: '组件',
         icon: 'disconnect',
         routes:[
           {
             path: '/Antd/Transfer',
-            name: '穿梭框',
+            name: 'antd穿梭框',
             component: './Antd/Transfer/index',
-            icon: 'disconnect',
+          },
+          {
+            path: '/Antd/ReactContext',
+            name: 'react-context',
+            component: './Antd/ReactContext/index',
+   
+          },
+          {
+            path: '/Antd/FunElement',
+            name: 'react函数组件',
+            component: './Antd/FunElement/index',
+          },
+          {
+            path: '/Antd/ThrottlingStabilization',
+            name: '节流防抖',
+            component: './Antd/ThrottlingStabilization/index',
+          },
+          {
+            path: '/Antd/Hook',
+            name: 'Hook',
+            component: './Antd/Hook/index',
           },
         ]
       },
+      
       {
         component: '404',
       },

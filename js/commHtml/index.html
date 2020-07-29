@@ -10,22 +10,19 @@
 
 <body>
     <script>
-      　　var name = "The Window";
+        // 写法一
+        function m1({ x = 0, y = 0 } = {}) {
+            return [x, y];
+        }
 
-    　　var object = {
-    　　　　name : "My Object",
-
-    　　　　getNameFunc : function(){
-                let that = this
-    　　　　　　return function(){
-    　　　　　　　　return that.name;
-    　　　　　　};
-
-    　　　　}
-
-    　　};
-
-　　    alert(object.getNameFunc()());
+        // 写法二
+        function m2({ x, y } = { x: 0, y: 0 }) {
+            return [x, y];
+        }
+        console.log(
+           m1(),m2(),
+           (function (a,) {}).length // 2
+        )
     </script>
 </body>
 

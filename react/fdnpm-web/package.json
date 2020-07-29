@@ -46,6 +46,7 @@
     "not ie <= 10"
   ],
   "dependencies": {
+    "@ant-design/pro-layout": "^6.2.5",
     "@antv/data-set": "^0.10.1",
     "@antv/l7": "^2.2.8",
     "@antv/l7-district": "^2.2.20",
@@ -74,6 +75,7 @@
     "qs": "^6.6.0",
     "rc-animate": "^2.6.0",
     "react": "^16.7.0",
+    "react-amap": "^1.2.8",
     "react-container-query": "^0.11.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-document-title": "^2.0.3",

@@ -30,7 +30,7 @@ export default class GlobalHeader extends PureComponent {
           <img src={logo} alt="logo" width="52" />
           <div className={styles.title}>
             <h1>{title}</h1>
-            <p>水生生物自然保护区信息子系统</p>
+            {/* <p>水生生物自然保护区信息子系统</p> */}
             <i></i>
           </div>
         </Link>
@@ -43,7 +43,7 @@ export default class GlobalHeader extends PureComponent {
             <h1>{title}</h1>
           </Link>
         </div> */}
-        <RightContent {...this.props} />
+        {/* <RightContent {...this.props} /> */}
       </div>
     )
   }
