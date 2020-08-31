@@ -66,7 +66,7 @@ export default [
           // },
           {
             path: '/Amap/SpatialAnalysis',
-            name: '行政区钻孔地图',
+            name: '行政区划浏览',
             component: './Amap/SpatialAnalysis/index',
           },
           

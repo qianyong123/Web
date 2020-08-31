@@ -28,10 +28,7 @@ class SpatialAnalysis extends Component {
     // const { selectedIds } = props
 
     this.state = {
-      // modalVisible: false,
-      // currentItem: {},
-      // modalType: 'new',
-      // selectedRows: selectedIds,
+    
       submitTimeList: [],
       filterFormValues: {},
     }
@@ -46,18 +43,6 @@ class SpatialAnalysis extends Component {
   }
 
 
-  handleModalVisible = (flag, type, item) => {
-    this.setState(() => {
-      return {
-        modalVisible: !!flag,
-        currentItem: item || {},
-        modalType: type || 'new',
-      }
-    })
-    
-  }
-
-
   parseMarker = tude => {
     const reg = /[0-9][0-9]*([.][0-9]{1,6})?/
     return tude.match(reg) && tude.match(reg)[0]
@@ -68,7 +53,7 @@ class SpatialAnalysis extends Component {
     const marks = []
     if(!markers) return
     markers.forEach((item) => {
-      if(!reg.test(item.longitude) || !reg.test(item.longitude)) return;
+      if(!reg.test(item.latitude) || !reg.test(item.longitude)) return;
       marks.push({
         longitude:item.longitude,
         latitude: item.latitude,
@@ -111,55 +96,23 @@ class SpatialAnalysis extends Component {
       district,
       listLoading,
     } = this.props
-    const data = [
-      {
+    const data = [ ]
+    for(let i=0;i<1;i++){
+      data.push({
         name:"名称",
         currentProtectionArea:'110',
-        longitude:'116.40631',
-        latitude:'39.908775'
-      }
-    ]
+        longitude:116+i,
+        latitude:39+i
+      })
+    }
     const markList = this.formatMarkers(data)
-    return (
-      <div>
-        <Layout>
-          {/* <Card bordered={false}>
-            <Filter 
-              onSearch={this.handleSearch} 
-              resetForm={this.handleFormReset} 
-              options={district.pickerList} 
-              submitTimeList={submitTimeList}
-            />
-          </Card> */}
-          <Content>
-            <Spin size="large" spinning={false}>
-              <Card bordered={false}>
-                <Col span={24}>
-                  <Map
-                    markers={markList}
-                    height={600}
-                    // colors={['#0ece87']}
-                  />
-                </Col>
-                {/* <Col span={9} offset={1}>
-                  <Descriptions
-                    bordered
-                    size="small"
-                    column={1}
-                  >
-                    <Descriptions.Item label="保护区数量">{data && data.amount || 0}</Descriptions.Item>
-                    <Descriptions.Item label="保护区总面积">{data && data.currentProtectionAreas || 0}(公顷)</Descriptions.Item>
-                    <Descriptions.Item label="保护区核心区面积">{data && data.coreRegionAreas || 0}(公顷)</Descriptions.Item>
-                  </Descriptions>
-                </Col> */}
-              </Card>
-            </Spin>
-            
-          </Content>
-        </Layout>
 
-        <BackTop />
-      </div>
+    return (
+            <Spin size="large" spinning={false}>         
+              <Map
+                markers={markList}
+              />            
+            </Spin>  
     )
   }
 }
