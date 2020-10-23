@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>grid布局</title>
+  <style>
+    .wrapper {
+      height: 200vh;
+      margin: 60px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+      grid-auto-rows: minmax(100px, auto);
+    }
+
+    .one {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      background: #19CAAD;
+    }
+
+    .two {
+      grid-column-start: 2;
+      grid-column-end: 4;
+      grid-row-start: 1;
+      grid-row-end: 2;
+      /*   如果有重叠，就使用 z-index */
+      z-index: 1;
+
+      background: #8CC7B5;
+    }
+
+    .three {
+      grid-column-start: 3;
+      grid-column-end: 4;
+      grid-row-start: 2;
+      grid-row-end: 4;
+      background: #D1BA74;
+    }
+
+    .four {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 2;
+      grid-row-end: 5;
+      background: #BEE7E9;
+    }
+
+    .five {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 2;
+      grid-row-end: 5;
+      background: #E6CEAC;
+    }
+
+    .six {
+      /* grid-column-start: span 2; */
+      background: #ECAD9E;
+    }
+
+    .seven {
+      background: #BEEDC7;
+    }
+
+    .eight {
+      background: #F4606C;
+    }
+
+    .nine {
+      background: #A0EEE1;
+    }
+
+    .item {
+      text-align: center;
+      font-size: 200%;
+      color: #fff;
+    }
+
+    .wrapper2 {
+      display: flex;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="one item">One</div>
+    <div class="two item">Two</div>
+    <div class="three item">Three</div>
+    <div class="four item">Four</div>
+    <div class="five item">Five</div>
+    <div class="six item">Six</div>
+    <div class="seven item">Seven</div>
+    <div class="eight item">eight</div>
+    <div class="nine item">Nine</div>
+  </div>
+  <button></button>
+  <script>
+
+var baz = 3;
+var bazz ={
+  baz: 2,
+  getbaz: function() {
+    return this.baz
+  }
+}
+console.log(bazz.getbaz())
+
+
+  </script>
+</body>
+
+</html>

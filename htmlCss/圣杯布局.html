@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>圣杯布局</title>
+  <style>
+    body{
+      margin: 0;
+      padding: 0;
+    }
+    .contenr{
+      padding:0 200px;
+      height: 200px;
+    }
+    .contenr div{
+      float: left;
+      position: relative;
+      height: 200px;
+    }
+      .module{
+        width: 100%;
+        background-color: #ccc;
+      }
+      .left{
+        width: 200px;
+        background-color: pink;
+        margin-left: -100%;
+        left: -200px;
+      }
+
+      .right{
+        width: 200px;
+        background-color: blue;
+        margin-left: -200px;
+        right: -200px;
+      }
+
+  /*
+      圣杯布局主要是实现容器 左右两边元素的宽度固定，中间的内容自适应。
+
+      原理：
+
+      盒子模型的宽度 = margin + padding + border + content
+
+      使用float浮动脱离文档流，但是由于第一个div的宽度是100%,所以后面的2个div 在第二行。
+      这个时候我们给left加 margin-left:-200px
+      left盒子的宽度 = (-200+0) + (0+0) + (0+0) + 200 = 0
+      因为这个时候left的宽度是0了，所以left盒子跑到第一行的右边去了。
+      在设置margin-left:-100%, left盒子自然就跑到左边去了
+
+      right盒子也是同理
+
+
+      后面在使用position: relative 相对定位来移动，为了不遮住中间的内容区。
+  */
+
+
+  </style>
+
+  
+</head>
+<body>
+  <div class="contenr">
+      <div class="module">tryrt</div>
+      <div class="left"></div>
+      <div class="right"></div>
+  </div>
+</body>
+</html>

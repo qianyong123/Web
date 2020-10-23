@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>旋转相册</title>
+  <style type="text/css">
+    html {
+      width: 100%;
+      height: 100%;
+    }
+
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: url('./img/xx1.jpg') no-repeat center center;
+      background-size: 100%;
+    }
+
+    .bigbox {
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      top: 40%;
+      left: 40%;
+    }
+
+    .box {
+      width: 500px;
+      height: 300px;
+      /* margin: 0 auto; */
+      transform-style: preserve-3d;
+      transform: rotateX(-30deg) rotateY(-80deg);
+      -webkit-animation: mystyle 15s infinite;
+      animation-timing-function: linear;
+    }
+
+    @-webkit-keyframes mystyle {
+      from {
+        transform: rotateX(-180deg) rotateY(-180deg);
+      }
+
+      to {
+        transform: rotateX(180deg) rotateY(180deg);
+      }
+    }
+
+    .box img {
+      cursor: pointer;
+    }
+
+    .box div {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      opacity: 0.8;
+      transition: all .4s;
+    }
+
+    .bigpic {
+      width: 200px;
+      height: 200px;
+    }
+
+    .box .bigfront {
+      transform: rotateY(0deg) translateZ(100px);
+    }
+
+    .box .bigback {
+      transform: translateZ(-100px) rotateY(180deg);
+    }
+
+    .box .bigleft {
+      transform: rotateY(90deg) translateZ(100px);
+    }
+
+    .box .bigright {
+      transform: rotateY(-90deg) translateZ(100px);
+    }
+
+    .box .bigtop {
+      transform: rotateX(90deg) translateZ(100px);
+    }
+
+    .box .bigbottom {
+      transform: rotateX(-90deg) translateZ(100px);
+    }
+
+    .box span {
+      display: block;
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      top: 25px;
+      left: 25px;
+    }
+
+    .box .smallpic {
+      width: 140px;
+      height: 140px;
+    }
+
+    .box .smallleft {
+      transform: rotateY(90deg) translateZ(70px);
+    }
+
+    .box .smallright {
+      transform: rotateY(-90deg) translateZ(70px);
+    }
+
+    .box .smalltop {
+      transform: rotateX(90deg) translateZ(70px);
+    }
+
+    .box .smallbottom {
+      transform: rotateX(-90deg) translateZ(70px);
+    }
+
+    .box .smallfront {
+      transform: rotateY(0deg) translateZ(70px);
+    }
+
+    .box .smallback {
+      transform: translateZ(-70px) rotateY(180deg);
+    }
+
+    /*:hover 我们之前说过的一个css选择器，能够让鼠标指向的时候触发*/
+    .box:hover .bigleft {
+      transform: rotateY(90deg) translateZ(300px);
+    }
+
+    .box:hover .bigright {
+      transform: rotateY(-90deg) translateZ(300px);
+    }
+
+    .box:hover .bigtop {
+      transform: rotateX(90deg) translateZ(300px);
+    }
+
+    .box:hover .bigbottom {
+      transform: rotateX(-90deg) translateZ(300px);
+    }
+
+    .box:hover .bigfront {
+      transform: rotateY(0deg) translateZ(300px);
+    }
+
+    .box:hover .bigback {
+      transform: translateZ(-300px) rotateY(180deg);
+    }
+
+    #shade {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+    }
+
+    .openImg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background: #fff;
+      display: none;
+    }
+
+    .openImg #clearSpan {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      color: #ccc;
+      cursor: pointer;
+    }
+
+    .openImg img {
+      max-width: 800px;
+
+    }
+
+    #audio {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bigbox">
+    <div class="box" id="boxs">
+      <div class="bigfront">
+        <img src="img/m1.jpg" class="bigpic">
+      </div>
+      <div class="bigback">
+        <img src="img/m1.jpg" class="bigpic">
+      </div>
+      <div class="bigleft">
+        <img src="img/m1.jpg" class="bigpic">
+      </div>
+      <div class="bigright">
+        <img src="img/m2.jpg" class="bigpic">
+      </div>
+      <div class="bigtop">
+        <img src="img/m2.jpg" class="bigpic">
+      </div>
+      <div class="bigbottom">
+        <img src="img/m2.jpg" class="bigpic">
+      </div>
+      <span class="smallfront">
+        <img src="img/m3.jpg" class="smallpic" />
+      </span>
+      <span class="smallback">
+        <img src="img/m3.jpg" class="smallpic" />
+      </span>
+      <span class="smallleft">
+        <img src="img/m3.jpg" class="smallpic" />
+      </span>
+      <span class="smallright">
+        <img src="img/m4.jpg" class="smallpic" />
+      </span>
+      <span class="smalltop">
+        <img src="img/m4.jpg" class="smallpic" />
+      </span>
+      <span class="smallbottom">
+        <img src="img/m4.jpg" class="smallpic" />
+      </span>
+    </div>
+
+  </div>
+  <div id="shade"></div>
+
+  <div class="openImg" id="openImg">
+    <img src="" alt="" id="viewImg">
+    <span id="clearSpan">X</span>
+  </div>
+  <audio id="audio" controls="controls" loop autoplay src="./quanshiai.mp3">
+    您的浏览器不支持 audio 标签。
+  </audio>
+  <script>
+    const imgHtml = boxs.getElementsByTagName('img')
+    const list = Array.from(imgHtml)
+    const shade = document.getElementById('shade')
+    const openImg = document.getElementById('openImg')
+    const viewImg = document.getElementById('viewImg')
+    const clearSpan = document.getElementById('clearSpan')
+    const music = document.getElementById('audio')//获取audio
+
+
+
+    shade.onclick = (e) => {
+      e.preventDefault()
+      shade.style.display = 'none'
+      openImg.style.display = 'none'
+
+    }
+    clearSpan.onclick = (e) => {
+      e.preventDefault()
+        shade.style.display = 'none'
+        openImg.style.display = 'none'
+    }
+
+    list.forEach((item, index) => {
+      item.onclick = (e) => {
+        e.preventDefault()
+        const imgIn = item.src.indexOf('/img')
+        const src = item.src.slice(imgIn + 1)
+        shade.style.display = 'block'
+        openImg.style.display = 'block'
+        viewImg.src = src
+        if (music.pause) {
+          music.play()//调用播放
+        }
+        console.log(src)
+      }
+
+    })
+  </script>
+</body>
+
+</html>
