@@ -7,7 +7,7 @@ import {
 import './index.less'
 
 
-const Index = ({item:{id, name, time, temperature }}) => {
+const Index = ({item:{id, text_day, date, low, high,week,wc_day,wd_day}}) => {
   let history = useHistory();
 
   const onClick = () => {
@@ -16,9 +16,12 @@ const Index = ({item:{id, name, time, temperature }}) => {
 
   return (
     <div className="homeItem">   
-      <h2 className="text">{name}</h2>
-      <p>{temperature}</p>
-      <p className="time">{time}</p>
+      <h2 className="text">{text_day}</h2>
+      <p>{`${low}°C`} ~ {`${high}°C`}</p>
+      <p>{wc_day}</p>
+      <p>{wd_day}</p>
+      <p>{date}</p>
+      <p className="time">{week}</p>
     </div>
   )
 }

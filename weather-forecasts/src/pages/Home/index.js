@@ -5,11 +5,12 @@ import {
   useLocation,
   useHistory
 } from "react-router-dom";
-import { Row, Col, Pagination, Spin, Layout, Input, Space } from 'antd';
+import { Row, Col, Pagination, Spin, Layout, Input, Space,message } from 'antd';
 import ListItem from '@/components/ListItem'
 import fetching from '@/util/fetching'
 import Headers from '@/components/Header'
 import Footers from '@/components/Footer'
+import Button from 'antd/lib/button';
 
 const { Footer, Content } = Layout;
 const { Search } = Input;
@@ -24,17 +25,16 @@ const { xs, sm, md, lg, xl, xxl } = {
 
 const Index = () => {
   const data = [
-    { temperature: "9°C~30°C", name: '多云', time: "31日星期一" },
-    { temperature: "9°C~30°C", name: '多云', time: "31日星期一" },
-    { temperature: "9°C~30°C", name: '多云', time: "31日星期一" },
-    { temperature: "9°C~30°C", name: '多云', time: "31日星期一" },
-    { temperature: "9°C~30°C", name: '多云', time: "31日星期一" },
-    { temperature: "9°C~30°C", name: '多云', time: "31日星期一" },
-    { temperature: "9°C~30°C", name: '多云', time: "31日星期一" },
-    { temperature: "9°C~30°C", name: '多云', time: "31日星期一" },
+    {
+      text_day: '多云',
+      week: "星期一",
+      high: "8", // 最高气温
+      low: "-1", // 最低气温
+      date: '2020-10-22'
+    },
 
   ]
-  const [List, SetList] = useState(data)
+  const [List, SetList] = useState([])
   const [pageNumber, setpageNumber] = useState(1)
   const [pageSize, setpageSize] = useState(10)
   const [total, setTotal] = useState(0)
@@ -45,8 +45,11 @@ const Index = () => {
   const path = location.pathname === '/' || location.pathname === '/home' ? '' : location.pathname.replace('/', '')
   useEffect(() => {
     // fetchList(1, 10)
-    // history.push(`/login`,)
-  }, [])
+    const token = localStorage.getItem('token')
+    if (!token) {
+      history.push(`/login`,)
+    }
+  }, [location])
 
   function onChange(number, Size) {
     console.log('Page: ', number, Size);
@@ -55,24 +58,37 @@ const Index = () => {
     fetchList(number, Size)
   }
 
-  const onSearch = value => console.log(value);
+  const onSearch = value => {
+    if(!value) {
+      message.warning('请输入查询的城市名称!')
+      return;
+    }
+    fetchList(value)
+  };
 
-  const fetchList = (number, Size) => {
+  const fetchList = (cityName = '') => {
     setLoding(true)
-    fetching('/api/admin/query', {
+    fetching('/weather_boot/call/weather', {
       data: {
-        classify: path,
-        pageNumber: number,
-        pageSize: Size
+        cityName
       }
     })
       .then(res => {
         setLoding(false)
-        if (res && res.data) {
-          SetList(res.data)
-          setTotal(res.total)
-        }
+        if (res && res.code === 401) {
+          message.error('登录已过期，请重新登录!')
+          setTimeout(()=>{
+            quitLogin()
+          },1000)
+        } else if (res && res.code === 200) {
+          if(Array.isArray(res.data)) SetList(res.data)
+        } else message.error(res.msg)
       })
+  }
+
+  const quitLogin = ()=>{
+    localStorage.removeItem('tolen')
+    history.push(`/login`)
   }
 
   return (
@@ -81,6 +97,7 @@ const Index = () => {
       <Content className="Content">
         <Spin spinning={loding}>
           <div className="home">
+            <Button onClick={quitLogin} className="quitLogin">退出登录</Button>
             <h1>天气预报查询</h1>
             <div>
               <Space direction="vertical">
@@ -108,7 +125,7 @@ const Index = () => {
               }
             </div>
 
-            {
+            {/* {
               total > 10 &&
               <Pagination
                 style={{ padding: "40px 20px", }}
@@ -118,7 +135,7 @@ const Index = () => {
                 showSizeChanger
                 onChange={onChange}
               />
-            }
+            } */}
 
           </div>
         </Spin>

@@ -26,10 +26,10 @@ module.exports = {
       style: true,
     }),
     addLessLoader({//配置antd自定义主题
-      // lessOptions: {
-      //   javascriptEnabled: true,
-      //   modifyVars: { '@primary-color': '#eb5055' },
-      // }
+      lessOptions: {
+        javascriptEnabled: true,
+        modifyVars: { '@primary-color': '#eb5055' },
+      }
     }),
     addWebpackAlias({ //路径别名
       '@': path.resolve(__dirname, 'src'),

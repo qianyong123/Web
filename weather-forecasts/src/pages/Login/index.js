@@ -1,10 +1,11 @@
 import React from 'react'
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox,message } from 'antd';
 import {
   useHistory,
 } from "react-router-dom";
-
+import fetching from '@/util/fetching'
 import './index.less'
+
 const layout = {
   labelCol: {
     span: 0,
@@ -30,7 +31,17 @@ const Index = () => {
 
   const onFinish = (values) => {
     console.log('Success:', values);
-    history.push(`/home`,)
+    fetching('/weather_boot/call/login', {
+      body: values,
+      method:'POST'
+    })
+      .then(res => {
+        if(res && res.code === 200) {
+          localStorage.setItem('token',res.data)
+          history.push(`/home`,)
+        } else message.error(res.msg)
+       
+      })
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -40,6 +51,7 @@ const Index = () => {
   return (
     <div className="login_bc">
       <div className="login">
+        <h2>简易天气预报系统</h2>
         <Form
           {...layout}
           name="basic"
