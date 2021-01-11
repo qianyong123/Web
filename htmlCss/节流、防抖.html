@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>节流、防抖</title>
+</head>
+
+<body>
+  <button id="btn">节流</button>
+  <button id="btn2">防抖</button>
+
+  <script>
+    // 防抖：在事件触发n秒后在执行回调函数，在这个时间内在次触发事件，时间会重新计时
+    function throttle(fn,t){
+      let time;
+      return function(...res){
+
+        clearTimeout(time)
+        time = setTimeout(()=>{
+          fn.apply(this,...res)
+          time = false
+        },t)
+      }
+    }
+
+    function a(v){
+      console.log('aaaa',v)
+    }
+    const btn = document.getElementById('btn')
+    btn.onclick = throttle(a,1000)
+
+    // 节流：规定在一定时间内，执行一次函数，如果在这个时间里多次触发，只生效一次
+    function shake(fn,t){
+      let time = true;
+      return function(){
+        if(!time) return
+        time = false
+        setTimeout(()=>{
+          fn.apply(this,arguments)
+          time = true
+        },t)
+      }
+    }
+
+    const btn2 = document.getElementById('btn2')
+
+    btn2.onclick = shake(a,1000)
+
+  </script>
+</body>
+
+</html>

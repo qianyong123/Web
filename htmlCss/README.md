@@ -4,6 +4,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    word-break:keep-all;
 ```
 ## 元素垂直居中的方式
 
