@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手动实现vue数据双向绑定</title>
+</head>
+<body>
+    <div id="app">
+        {{name}}
+       <input type="text" v-modal="age">
+       {{age}}
+       <div>{{age}}</div>
+    </div>
+    <script>
+        // 继承EventTarget接口 
+        class vue extends EventTarget{
+            
+            constructor(option){
+                super()
+                this.option=option
+                this._data = this.option.data
+                this.el = document.querySelector(this.option.el)
+                this.compilleNone(this.el)
+                this.observe(this._data)
+            }
+            observe(data){
+                let _this = this
+                this._data = new Proxy(data,{
+                    set:(target,prop,newValue)=>{
+                        console.log(newValue)
+                        // 自定义事件
+                        let event = new CustomEvent(prop,{
+                            detail:newValue
+                        })
+                        // 触发事件
+                        _this.dispatchEvent(event)
+                        return Reflect.set(...arguments)
+                    }
+                })
+            }
+            compilleNone(el){
+                let child = el.childNodes ? [...el.childNodes] : []
+                child.forEach((node)=>{
+                    if(node.nodeType === 3){ // 文本
+                        let text = node.textContent;
+                        // 正则匹配vue语法
+                        let reg = /\{\{\s*([^\s\{\}]+)\s*\}\}/g
+                        if(reg.test(text)){
+                            // 获取匹配到的属性名称
+                            let $1 = RegExp.$1
+                            console.log($1)
+                            // 判断是否有这个属性，然后设定值
+                            this._data[$1] && (node.textContent = text.replace(reg,this._data[$1]))
+                            // 监听事件并赋值
+                            this.addEventListener($1,e=>{
+                                node.textContent = text.replace(reg,e.detail)
+                            })
+                        }
+                    } else if(node.nodeType === 1){ // el节点
+                        // 获取el属性
+                        let attr = node.attributes
+                        // 判断自身属性是否存在
+                        if(attr.hasOwnProperty('v-modal')){
+                            let keyName = attr['v-modal'].nodeValue
+                            node.value = this._data[keyName]
+                            // 监听input有变化时，更新data
+                            node.addEventListener('input',e=>{
+                                this._data[keyName] = node.value
+                            })
+                        }
+                        this.compilleNone(node)
+                    }
+                })
+                
+            }
+        }
+    </script>
+    <script>
+        var vm = new vue({
+            el:"#app",
+            data:{
+                name:"111",
+                age:18
+            }
+        })
+        console.log(vm)
+    </script>
+</body>
+</html>

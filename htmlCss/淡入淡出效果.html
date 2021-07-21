@@ -22,19 +22,28 @@
             /* animation-direction:alternate; */
         }
     
-
+        .add{
+            width: 500px;
+            background-color: aqua;
+        }
     </style>
 </head>
 <body>
-    <div id="box"></div>
-    <button id="btn" onclick="btn()">点击</button>
+    <div>
+        <div id="box" name="123" data-id='456'></div>
+        <button id="btn" class="ww" onclick="btn()">点击</button>
+    </div>
+   
     <script>
         const box = document.getElementById('box')
+        console.log(box.getAttribute('name'))
         let opt = 1
          function getStyle(Element,Property){
             return Element.currentStyle ? Element.currentStyle[Property] : getComputedStyle(ELement)[Property];
         }
         function btn (){
+        box.parentNode.setAttribute('class','add')
+
             if(opt) {
                 box.style.opacity = 0
                 opt = 0

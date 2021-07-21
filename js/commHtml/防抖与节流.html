@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            height: 200px;
+            background-color: #09f;
+            color: #fff;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="box">11</div>
+
+    <script>
+
+
+
+
+        var box = document.querySelector('.box')
+        var onDebunce = throttle(move, 1000)
+        box.onmousemove = onDebunce
+        function move(ev) {
+            this.innerHTML = ev.clientX;
+        }
+        function throttle(fn, wait) {
+            let time = null;
+            return function () {
+                var args = arguments
+                if (!time) {
+                    time = setTimeout(() => {
+                        time = null
+                        fn.apply(this, args)
+                    }, wait)
+                }
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>
